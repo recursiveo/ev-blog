@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <title>Contact Us - EVTrendz</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='styles/styles.css') }}">
+    <script type="text/javascript" rel="script" src="{{ url_for('static', filename = 'js/contactUsJs.js') }}"></script>
+</head>
+<body>
+<header>
+    <div class="navbar top-fixed">
+        <img class="logo" src="../static/images/logo_cr.png">
+        <nav>
+            <input type="checkbox"/>
+            <div class="menu-wrapper">
+                <ul class="responsive-text" id="menu">
+                    <div class="menulist-container">
+                        <li><a  href="..\home_page\index.html">Home</a></li>
+                        <li><a href="..\product\jessin html and css\index.html">Products</a></li>
+                        <li><a href="..\technology\evi.html">Technology</a></li>
+                        <li><a class="active" href="..\Contact Us\index.html">Contact Us</a></li>
+                        <li><a href="..\About Us\index.html">About</a></li>
+                    </div>
+                </ul>
+                <svg class="caret" fill="currentColor" height="35" id="icon" viewBox="0 0 16 16"
+                     width="35" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z"
+                          fill-rule="evenodd"/>
+                </svg>
+            </div>
+
+        </nav>
+
+    </div>
+</header>
+
+<!--    ------------------ Main Content ------------------      -->
+
+<div>
+    <main>
+        <section>
+            <div class = "maparea">
+				<iframe class = "map" src="http://maps.google.com/maps?q=11.416507,75.947084&z=16&output=embed"></iframe>
+            </div>
+
+			<div class="container">
+			<h2>Write To Us</h2>
+				<form action="#">
+
+						<label>Full Name</label>
+						<input type="text" id="fname" name="fullname" placeholder="Your name..">
+
+						<label>Email Id</label>
+						<input type="text" id="lname" name="lastname" placeholder="example@emaple.com..">
+
+						<label>Country</label>
+						<select id="country" name="country">
+
+						  <option value="canada">Canada</option>
+						  <option value="australia">Australia</option>
+						  <option value="usa">USA</option>
+						  <option value="india">India</option>
+						</select>
+
+						<label>Subject</label>
+						<textarea id="subject" name="subject" placeholder="Write something.." style="height:200px"></textarea>
+
+						<input type="submit" value="Submit" onclick="contactUsSubmission(document.getElementById('fname').value,
+                        document.getElementById('lname').value,document.getElementById('country').value,document.getElementById('subject').value)">
+
+				</form>
+{#                <button onclick="get_contactUs()"> Show My Enquires </button>#}
+                <button> <a  href="/open_Enquiry_page/"> Show My Enquires</a> </button>
+
+				<ul class = "icons">
+                    <li>
+                        <i class = "fa fa-twitter"></i>
+                    </li>
+                    <li>
+                        <i class = "fa fa-facebook"></i>
+                    </li>
+					<li>
+                        <i class = "fa fa-instagram"></i>
+                    </li>
+                </ul>
+				<address>
+
+
+				Pulickal House <br>
+				Thamarassery Post, Kozhikode <br>
+				Kerala,India 673573
+				<a href="enquiry@evtrendz.com">enquiry@evtrendz.com</a><br>
+				<a href="tel:+10000000000">(+1) 00-000-00000</a>
+
+				</address>
+			</div>
+        </section>
+
+    </main>
+</div>
+<!--    ------------------ Main Content ------------------      -->
+
+<footer class="footer">
+    <div class="center">
+        <div class="box top-box">
+            &copy All rights reserved. Copying will result in getting snapped.
+        </div>
+        <div class="box">
+            Social TAGs
+        </div>
+    </div>
+</footer>
+
+</body>
+</html>
