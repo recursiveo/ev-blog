@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <title>Home - EVTrendz</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='styles/styles-main.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='styles/reviews-style.css') }}">
+    <script type="text/javascript" rel="script" src="{{ url_for('static', filename = 'js/reviews-home.js') }}"></script>
+</head>
+<body>
+<header>
+    <div class="navbar top-fixed">
+        <img class="logo" src="../static/images/logo_cr.png">
+        <nav>
+            <input type="checkbox"/>
+            <div class="menu-wrapper">
+                <ul class="responsive-text" id="menu">
+                    <div class="menulist-container">
+                        <li><a class="active" href="#">Reviews</a></li>
+                        <li><a href="#">Products</a></li>
+                        <li><a href="#">Technology</a></li>
+                        <li><a href="#">Contact Us</a></li>
+                        <li><a href="#">About</a></li>
+                    </div>
+                </ul>
+                <svg class="caret" fill="currentColor" height="35" id="icon" viewBox="0 0 16 16"
+                     width="35" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z"
+                          fill-rule="evenodd"/>
+                </svg>
+            </div>
+
+        </nav>
+
+    </div>
+</header>
+
+<main class="content">
+
+    <div class="row">
+        <div class="review-column">
+            <div class="view-review-column">
+                <div class="review-column-left">
+                    <p class="review-label">
+                        <label for="car">Select from below a car to see reviews</label>
+                    </p>
+                    <select name="car" id="car">
+                        <option value="volvo">Volvo</option>
+                        <option value="saab">Saab</option>
+                        <option value="mercedes">Mercedes</option>
+                        <option value="audi">Audi</option>
+                    </select>
+                    <input type="submit" value="View Reviews" onclick="goto_reviews()" id="show-reviews">
+                </div>
+
+                <!-- <button class="review-btn btn-center">Button</button> -->
+            </div>
+        </div>
+        <div class="vl"></div>
+        <div class="review-column">
+            <div class="view-review-column">
+                <div class="review-column-right">
+                    <h1>Add Review</h1>
+                    <div class="input-area">
+                        <label for="car-brand">Select Brand</label>
+                        <select name="car" id="car-brand">
+                            <option value="volvo">Volvo</option>
+                            <option value="BMW" selected>BMW</option>
+                            <option value="mercedes">Mercedes</option>
+                            <option value="audi">Audi</option>
+                        </select>
+                        <br>
+                        <label for="car-type">Select Model</label>
+                        <select name="car" id="car-model">
+                            <option value="V Series" selected>V Series</option>
+                            <option value="V Series">V Series</option>
+                            <option value="V Series">V Series</option>
+                            <option value="V Series">V Series</option>
+                        </select>
+                        <br>
+                        <!-- <label for="review"> Review </label><br>  -->
+                        <textarea rows="10"
+                                  cols="50"
+                                  placeholder="Add your Review"
+                                  id="review"></textarea>
+                        <br>
+                        <input type="submit" name="submit" id="submit-review" onclick="submit_review()">
+                    </div>
+
+                </div>
+
+                <!-- <button class="review-btn btn-center">Button</button> -->
+            </div>
+        </div>
+    </div>
+</main>
+
+<!--    ------------------ Main Content - End ------------------      -->
+
+<footer class="footer">
+    <div class="center">
+        <div class="box top-box">
+            &copy All rights reserved. Copying will result in getting snapped.
+        </div>
+        <div class="box">
+            Social TAGs
+        </div>
+    </div>
+</footer>
+
+</body>
+</html>
