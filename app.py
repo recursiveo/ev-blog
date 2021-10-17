@@ -1,5 +1,5 @@
 from flask import Flask, jsonify, render_template,request
-from src.ContactUs import insertContactUs
+from src.ContactUs import insertContactUs, deleteEnquiry
 from src.MongoConnection import connect_mongo
 import json
 app = Flask(__name__)
@@ -18,6 +18,7 @@ def openContactUs():
 def openEnquiryPage():
     return render_template('EnquiryDetails.html')
 
+
 @app.route("/sendContact_us/",methods = ['POST', 'GET']) #default method is get
 def contactus():
     if request.method == 'POST':
@@ -25,6 +26,16 @@ def contactus():
         print(rec)
         insertContactUs(rec)
     return jsonify(recipients=rec['contactobj']['email'])
+
+
+@app.route("/deleteDocument/",methods = ['POST', 'GET']) #default method is get
+def deleteDocFromContactUs():
+    if request.method == 'POST':
+        rec = request.get_json()
+        print(rec)
+        deleteEnquiry(rec.get('docId'))
+    return jsonify(documentId=rec.get('docId'))
+
 
 
 @app.route("/get_contact_us/") #default method is get
