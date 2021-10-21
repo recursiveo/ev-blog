@@ -1,14 +1,14 @@
 var userobj ={
-//    email:'',
+    email:'',
     name:'',
     password:''
 }
-function userData(name,password)
+function userData(name,email,password)
 {
     debugger;
     console.log("hiiiiiiiiii")
     userobj.name = name;
-//    userobj.email = email;
+    userobj.email = email;
     userobj.password = password;
     debugger;
     console.log(userobj)
