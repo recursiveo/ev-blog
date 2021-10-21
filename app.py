@@ -52,6 +52,8 @@ def signup():
     logging.info("Exiting from signup")
     return render_template('reg.html')
 
+print("")
+
 
 if __name__ == '__main__':
     app.run(port=7000, debug=True)
