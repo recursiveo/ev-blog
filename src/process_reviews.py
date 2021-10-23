@@ -33,3 +33,13 @@ class Reviews:
         except Exception as e:
             logger.error(e)
             raise e
+
+    def update_reviews(self, req_data):
+        try:
+            upd_review = req_data['review_text']
+            uid = req_data['uid']
+            res = self.reviews_data.update_review(uid, upd_review)
+            return res
+        except Exception as e:
+            logger.error(e)
+            raise e
