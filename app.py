@@ -18,7 +18,7 @@ def hello_world():
 @app.route('/review-home')
 def reviews():
     try:
-        # return render_template('reviews.html')
+        # return render_template('view-reviews.html')
         return render_template('review-home.html')
     except Exception as e:
         logger.error(e)
@@ -29,7 +29,7 @@ def reviews():
 def show_reviews():
     try:
         data = process_reviews.get_reviews()
-        return render_template('reviews.html', list_data=data)
+        return render_template('view-reviews.html', list_data=data)
     except Exception as e:
         logger.error(e)
         raise e
@@ -63,6 +63,15 @@ def update_reviews():
     except Exception as e:
         logger.error(e)
         raise e
+
+
+@app.route('/add-review', methods=['GET'])
+def add_reviews():
+    return render_template('add-review.html')
+
+@app.route('/edit-review', methods=['GET'])
+def edit_review():
+    return render_template('edit-review.html')
 
 
 if __name__ == '__main__':

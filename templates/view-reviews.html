@@ -4,9 +4,7 @@
     <meta charset="UTF-8">
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <title>Reviews</title>
-    {#    <link href="../static/styles/styles-main.css" rel="stylesheet" type="text/css">#}
     <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='styles/styles-main.css') }}">
-    {#    <script type="text/javascript" rel="script" src="{{ url_for('static', filename = 'js/reviews.js') }}"></script>#}
 </head>
 <body>
 <header>
@@ -30,21 +28,11 @@
                           fill-rule="evenodd"/>
                 </svg>
             </div>
-
         </nav>
-
     </div>
 </header>
 
 <!--    ------------------ Main Content - Start ------------------      -->
-
-{#<div class="container">#}
-{#    <div class="banner-img">#}
-{#        <div class="banner-text">#}
-{#            <h1>Go Electric</h1>#}
-{#            <h3>Choose The Cleaner <span class="green">Eco Friendly </span>Option.</h3>#}
-{#        </div>#}
-{#    </div>#}
 
 <main class="content">
     <section class="responsive-text">
@@ -55,39 +43,14 @@
                     <hr class="hr1">
                 </h1>
                 <br>
-
-                {#                <p style="text-align: left">#}
-                {#                    <span class="big-letter">E</span>lectric vehicles are the go-to alternative in the future.#}
-                {#                    Skyrocketing prices of petrol and#}
-                {#                    diesel and the concerns of long-term environmental issues have sparked a general trend towards#}
-                {#                    all-electric vehicles. The number of EVs on our streets has significantly grown to almost about#}
-                {#                    5 million in 2019. With the likes of tesla mass producing electric autos and decreasing prices#}
-                {#                    will make EVs an everyday sight on the roads.#}
-                {#                </p>#}
             </div>
-            {#            <div class="column-right flex-sub">#}
-            {#                <figure>#}
-            {#                    <img src="../static/images/evtrendz-green.png" class="img-content-side right" alt="chart"/>#}
-            {#                </figure>#}
-            {##}
-            {#            </div>#}
         </div>
     </section>
     <section class="responsive-text">
-        {#        <h1 class="p-title center eco-green">User Reviews</h1>#}
         {% for item in list_data %}
             <div class="row">
                 <div class="column-left content-left-margin flex-main">
                     <div class="box-content">
-
-                        {##}
-                        {#                        <i>Instant torque delivered by electric motors.<br>#}
-                        {#                            Faster Acceleration than any gas cars similarly priced.#}
-                        {##}
-                        {#                            <p>Because electric motors deliver full torque right away,#}
-                        {#                                unlike internal combustion engines that need to gear up.</p>#}
-
-
                         <h2 class="sub-title">
                             <span id="user">{{ item['name'] }}</span>
                         </h2>
@@ -101,17 +64,9 @@
                             <br>
                             <i id="data" class="uname">{{ item['review_text'] }}</i>
                         </p>
-
-
                     </div>
                 </div>
-                {#            <div class="column-right center flex-sub">#}
-                {#                <figure>#}
-                {#                    <img src="../static/images/rimac_nevera_img.png" alt="fastest-car" class="right round-img"/>#}
-                {#                </figure>#}
-                {#            </div>#}
             </div>
-
             <hr class="hr2-right">
         {% endfor %}
     </section>

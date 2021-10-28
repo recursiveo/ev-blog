@@ -2,6 +2,13 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <title>Add Review</title>
+</head>
+<body>
+    <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <title>Home - EVTrendz</title>
     <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='styles/styles-main.css') }}">
@@ -30,48 +37,56 @@
                           fill-rule="evenodd"/>
                 </svg>
             </div>
+
         </nav>
+
     </div>
 </header>
 
 <main class="content">
 
     <div class="row">
-        <div class="review-column-bg-left">
-            <div class="">
-                <div class="review-column-left">
-                    <p class="review-label">
-                        <label for="car">Select from below a car to see reviews</label>
-                    </p>
-                    <select name="car" id="car">
-                        <option value="volvo">Volvo</option>
-                        <option value="saab">Saab</option>
-                        <option value="mercedes">Mercedes</option>
-                        <option value="audi">Audi</option>
-                    </select>
-                    <input type="submit" value="View Reviews" onclick="goto_reviews()" id="show-reviews">
+        <div class="review-bg-box">
+            <div class="border-box">
+                <div class="review-column-right">
+                    <h1>Add Review</h1>
+                    <div class="input-area">
+                        <form action="javascript:submit_review()">
+                            <label for="car-brand">Select Brand</label>
+                        <select name="car" id="car-brand" required>
+                            <option value="">None</option>
+                            <option value="volvo">Volvo</option>
+                            <option value="BMW" >BMW</option>
+                            <option value="mercedes">Mercedes</option>
+                            <option value="audi">Audi</option>
+                        </select>
+                        <br>
+                        <label for="car-type">Select Model</label>
+                        <select name="car" id="car-model" required>
+                            <option value="">None</option>
+                            <option value="V Series" >Alpha Series</option>
+                            <option value="V Series">Beta Series</option>
+                            <option value="V Series">Gamma Series</option>
+                            <option value="V Series">Delta Series</option>
+                        </select>
+                        <br>
+                        <!-- <label for="review"> Review </label><br>  -->
+                        <textarea rows="10"
+                                  cols="50"
+                                  placeholder="Add your Review"
+                                  id="review" required></textarea>
+                        <br>
+                        <input type="submit" value="submit" name="submit" id="submit-review">
+
+                        </form>
+
+                    </div>
+
                 </div>
 
                 <!-- <button class="review-btn btn-center">Button</button> -->
             </div>
         </div>
-
-        <!-- Right Column -->
-        <div class="review-column-bg-right">
-                <div class="review-column-left">
-                   <!--
-                   <p class="review-label">
-                        <label>Add Review</label>
-                    </p>
-                    -->
-                    <input type="submit" value="Add Review" onclick="goto_add_review()" id="add_review">
-                    <br>
-                    <input type="submit" value="Edit Review" onclick="goto_edit_review()">
-                </div>
-
-                <!-- <button class="review-btn btn-center">Button</button> -->
-        </div>
-
     </div>
 </main>
 
@@ -87,5 +102,7 @@
         </div>
     </div>
 </footer>
+</body>
+</html>
 </body>
 </html>

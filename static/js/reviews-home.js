@@ -32,3 +32,11 @@ var goto_reviews = () => {
         location.href = '/reviews';
     }
 }
+
+function goto_add_review(){
+    location.href = '/add-review';
+}
+
+function goto_edit_review(){
+    location.href = '/edit-review';
+}
