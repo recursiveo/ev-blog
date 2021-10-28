@@ -49,10 +49,10 @@
 				<form action="#">
 
 						<label>Full Name</label>
-						<input type="text" id="fname" name="fullname" placeholder="Your name..">
+						<input type="text" id="fname" name="fullname" placeholder="Your name.." required>
 
 						<label>Email Id</label>
-						<input type="text" id="lname" name="lastname" placeholder="example@emaple.com..">
+						<input type="email" id="lname" name="lastname" placeholder="example@emaple.com.." required>
 
 						<label>Country</label>
 						<select id="country" name="country">
@@ -64,7 +64,7 @@
 						</select>
 
 						<label>Subject</label>
-						<textarea id="subject" name="subject" placeholder="Write something.." style="height:200px"></textarea>
+						<textarea id="subject" name="subject" placeholder="Write something.." style="height:200px" required></textarea>
 
 						<input type="submit" value="Submit" onclick="contactUsSubmission(document.getElementById('fname').value,
                         document.getElementById('lname').value,document.getElementById('country').value,document.getElementById('subject').value)">

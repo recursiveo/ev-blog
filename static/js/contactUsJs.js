@@ -7,14 +7,19 @@ var contactobj ={
 function contactUsSubmission(name,email,country,subject)
 {
     debugger;
-    contactobj.name = name;
-    contactobj.email = email;
-    contactobj.country = country;
-    contactobj.subject = subject;
-    debugger;
-    //console.log(contactobj)
-    //send_mail()
-    send_contactUs_details()
+    if (name!="" && email !="" && subject!="") {
+
+        contactobj.name = name;
+        contactobj.email = email;
+        contactobj.country = country;
+        contactobj.subject = subject;
+        debugger;
+        //console.log(contactobj)
+        //send_mail()
+        send_contactUs_details()
+
+    }
+
 }
 
 
