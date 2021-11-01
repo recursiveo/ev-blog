@@ -2,9 +2,18 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <title>Add Review</title>
+</head>
+<body>
+    <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <title>Home - EVTrendz</title>
     <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='styles/styles-main.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='styles/reviews-style.css') }}">
+    <script type="text/javascript" rel="script" src="{{ url_for('static', filename = 'js/reviews-home.js') }}"></script>
 </head>
 <body>
 <header>
@@ -15,7 +24,7 @@
             <div class="menu-wrapper">
                 <ul class="responsive-text" id="menu">
                     <div class="menulist-container">
-                        <li><a class="active" href="#">Home</a></li>
+                        <li><a class="active" href="#">Reviews</a></li>
                         <li><a href="#">Products</a></li>
                         <li><a href="#">Technology</a></li>
                         <li><a href="#">Contact Us</a></li>
@@ -34,26 +43,37 @@
     </div>
 </header>
 
-<!--    ------------------ Main Content - Start ------------------      -->
-
 <main class="content">
 
-    <div style="margin-top: 100px;">
-        <p>
-        <h1>PAGE under construction :-[ </h1></p>
-        <p>
-        <ul>
-            <li><a href="{{ url_for('reviews') }}">Reviews-page</a></li>
-            <li><a href="#">PAGE 2</a></li>
-            <li><a href="#">PAGE 3</a></li>
-            <li><a href="#">PAGE 4</a></li>
+    <div class="row">
+        <div class="review-bg-box">
+            <div class="border-box">
+                <div class="review-column-right">
+                    <h1>Edit Review</h1>
+                    <div class="input-area">
+                        <form action="javascript: ">                    <!-- TODO: add submit function -->
+                            <label>
+                                Review ID:
 
-        </ul>
-        </p>
+                            </label>
+                            <input type="text" placeholder="Enter Id" required>
+                            <textarea rows="10"
+                                  cols="50"
+                                  placeholder="Add your Review"
+                                  id="review" required></textarea>
+                        <br>
+                        <input type="submit" value="submit" name="submit" id="submit-review">
 
+                        </form>
+
+                    </div>
+
+                </div>
+
+                <!-- <button class="review-btn btn-center">Button</button> -->
+            </div>
+        </div>
     </div>
-
-
 </main>
 
 <!--    ------------------ Main Content - End ------------------      -->
@@ -68,5 +88,7 @@
         </div>
     </div>
 </footer>
+</body>
+</html>
 </body>
 </html>
