@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Show Enquiries</title>
+    <script type="text/javascript" rel="script" src="{{ url_for('static', filename = 'js/EnquiryDetailsApis.js') }}"></script>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='styles/styles-Enquiry.css') }}">
+</head>
+<body onload="getEnqDetails()">
+<header>
+    <div class="navbar top-fixed">
+        <img class="logo" src="../static/images/logo_cr.png">
+        <nav>
+            <input type="checkbox"/>
+            <div class="menu-wrapper">
+                <ul class="responsive-text" id="menu">
+                    <div class="menulist-container">
+                        <li><a class="active" href="#">Home</a></li>
+                        <li><a href="#">Products</a></li>
+                        <li><a href="#">Technology</a></li>
+                        <li><a href="#">Contact Us</a></li>
+                        <li><a href="#">About</a></li>
+                    </div>
+                </ul>
+                <svg class="caret" fill="currentColor" height="35" id="icon" viewBox="0 0 16 16"
+                     width="35" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z"
+                          fill-rule="evenodd"/>
+                </svg>
+            </div>
+
+        </nav>
+
+    </div>
+</header>
+
+
+
+
+
+<main class="content">
+<br><br>
+    <h1>Enquiries..</h1>
+    <div id ="loader" class="loading"></div>
+    <div id="enqDetail" style="overflow-y: scroll; height:400px;"></div>
+
+</main>
+
+<footer class="footer">
+    <div class="center">
+        <div class="box top-box">
+            &copy All rights reserved. Copying will result in getting snapped.
+        </div>
+        <div class="box">
+            Social TAGs
+        </div>
+    </div>
+</footer>
+
+</body>
+</html>
