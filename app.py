@@ -126,7 +126,7 @@ def get_contact_us():
 
 
 #http://127.0.0.1:5000/send-mail/
-@app.route("/send-mail/",methods = ['POST', 'GET']) #default method is get
+@app.route("/send-mail/",methods = ['POST', 'GET'])
 def sendmail():
     if request.method == 'POST':
         rec = request.get_json()
