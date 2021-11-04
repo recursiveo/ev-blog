@@ -2,11 +2,12 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <title>Show Enquiries</title>
+    <script type="text/javascript" rel="script" src="{{ url_for('static', filename = 'js/EnquiryDetailsApis.js') }}"></script>
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
-    <title>Home - EVTrendz</title>
-    <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='styles/styles-main.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='styles/styles-Enquiry.css') }}">
 </head>
-<body>
+<body onload="getEnqDetails()">
 <header>
     <div class="navbar top-fixed">
         <img class="logo" src="../static/images/logo_cr.png">
@@ -34,29 +35,17 @@
     </div>
 </header>
 
-<!--    ------------------ Main Content - Start ------------------      -->
+
+
+
 
 <main class="content">
-
-    <div style="margin-top: 100px;">
-        <p>
-        <h1>PAGE under construction :-[ </h1></p>
-        <p>
-        <ul>
-            <li><a href="{{ url_for('reviews') }}">Reviews-page</a></li>
-            <li><a href="#">PAGE 2</a></li>
-            <li><a href="#">PAGE 3</a></li>
-            <li><a href="#">PAGE 4</a></li>
-
-        </ul>
-        </p>
-
-    </div>
-
+<br><br>
+    <h1>Enquiries..</h1>
+    <div id ="loader" class="loading"></div>
+    <div id="enqDetail" style="overflow-y: scroll; height:400px;"></div>
 
 </main>
-
-<!--    ------------------ Main Content - End ------------------      -->
 
 <footer class="footer">
     <div class="center">
@@ -68,5 +57,6 @@
         </div>
     </div>
 </footer>
+
 </body>
 </html>

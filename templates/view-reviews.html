@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
-    <title>Home - EVTrendz</title>
+    <title>Reviews</title>
     <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='styles/styles-main.css') }}">
 </head>
 <body>
@@ -15,7 +15,7 @@
             <div class="menu-wrapper">
                 <ul class="responsive-text" id="menu">
                     <div class="menulist-container">
-                        <li><a class="active" href="#">Home</a></li>
+                        <li><a class="active" href="#">Reviews</a></li>
                         <li><a href="#">Products</a></li>
                         <li><a href="#">Technology</a></li>
                         <li><a href="#">Contact Us</a></li>
@@ -28,32 +28,48 @@
                           fill-rule="evenodd"/>
                 </svg>
             </div>
-
         </nav>
-
     </div>
 </header>
 
 <!--    ------------------ Main Content - Start ------------------      -->
 
 <main class="content">
-
-    <div style="margin-top: 100px;">
-        <p>
-        <h1>PAGE under construction :-[ </h1></p>
-        <p>
-        <ul>
-            <li><a href="{{ url_for('reviews') }}">Reviews-page</a></li>
-            <li><a href="#">PAGE 2</a></li>
-            <li><a href="#">PAGE 3</a></li>
-            <li><a href="#">PAGE 4</a></li>
-
-        </ul>
-        </p>
-
-    </div>
-
-
+    <section class="responsive-text">
+        <div class="row">
+            <div class="column-left flex-main">
+                <h1 class="p-title">
+                    User Reviews
+                    <hr class="hr1">
+                </h1>
+                <br>
+            </div>
+        </div>
+    </section>
+    <section class="responsive-text">
+        {% for item in list_data %}
+            <div class="row">
+                <div class="column-left content-left-margin flex-main">
+                    <div class="box-content">
+                        <h2 class="sub-title">
+                            <span id="user">{{ item['name'] }}</span>
+                        </h2>
+                        <br>
+                        <p>
+                            <b>
+                                <span id="brand">{{ item['brand'] }}</span>
+                                :&nbsp&nbsp
+                                <span id="model">{{ item['model'] }}</span>
+                            </b>
+                            <br>
+                            <i id="data" class="uname">{{ item['review_text'] }}</i>
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <hr class="hr2-right">
+        {% endfor %}
+    </section>
 </main>
 
 <!--    ------------------ Main Content - End ------------------      -->
@@ -68,5 +84,6 @@
         </div>
     </div>
 </footer>
+
 </body>
 </html>
