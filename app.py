@@ -1,6 +1,18 @@
-from flask import Flask, jsonify, render_template
+from flask import Flask, request, jsonify, render_template, session, flash
+from src.PyMongo_Operations import insert_mongo, search_mongo
+import logging
+from src.logger import get_logger
+from src.process_reviews import Reviews
+from src.ContactUs import insertContactUs, deleteEnquiry, replyTextUpodate, replyEmail,mail_settings
+from src.MongoConnection import connect_mongo
+import json
+from flask_mail import Mail, Message
 
 app = Flask(__name__)
+app.secret_key="4564544532643869758"
+process_reviews = Reviews()
+
+logger = get_logger()
 
 
 @app.route('/')
@@ -21,9 +33,13 @@ def login():
         data = {'email': email, 'password': password}
         existing_data = search_mongo(data)
         if existing_data:
-            return jsonify(message="success")
-
-    return render_template('reg.html')
+            return render_template('index.html')
+        else:
+            return render_template('signup.html')
+    if 'username' not in session:
+        return render_template('login.html')
+    else:
+        return render_template('index.html')
 
 
 @app.route('/signup', methods=['POST', 'GET'])
@@ -37,7 +53,7 @@ def signup():
         existing_user = search_mongo(data)
         logging.info(f'existing_user {existing_user}')
         if existing_user > 0:
-            return render_template('landing.html')
+            return render_template('login.html')
         password = request.form['pass']
         username = request.form['username']
         logging.info('username and password {} {}'.format(username, password))
@@ -45,9 +61,7 @@ def signup():
         logging.info("Result from data insertion into db {}".format(output))
 
     logging.info("Exiting from signup")
-    return render_template('reg.html')
-
-print("")
+    return render_template('login.html')
 
 
 @app.route('/review-home')
@@ -117,7 +131,7 @@ def openEnquiryPage():
     return render_template('EnquiryDetails.html')
 
 
-@app.route("/sendContact_us/",methods = ['POST', 'GET']) #default method is get
+@app.route("/sendContact_us/",methods = ['POST', 'GET'])  # default method is get
 def contactus():
     if request.method == 'POST':
         rec = request.get_json()
@@ -126,7 +140,7 @@ def contactus():
     return jsonify(recipients=rec['contactobj']['email'])
 
 
-@app.route("/deleteDocument/",methods = ['POST', 'GET']) #default method is get
+@app.route("/deleteDocument/", methods=['POST', 'GET'])  # default method is get
 def deleteDocFromContactUs():
     if request.method == 'POST':
         rec = request.get_json()
@@ -135,17 +149,17 @@ def deleteDocFromContactUs():
     return jsonify(documentId=rec.get('docId'))
 
 
-@app.route("/updateReply/",methods = ['POST', 'GET']) #default method is get
+@app.route("/updateReply/", methods=['POST', 'GET'])  # default method is get
 def updateReplyInContactUs():
+    rec = None
     if request.method == 'POST':
         rec = request.get_json()
         print(rec)
-        replyTextUpodate(rec.get('id'),rec.get('replyText'),rec.get('email'))
+        replyTextUpodate(rec.get('id'), rec.get('replyText'), rec.get('email'))
     return jsonify(documentId=rec.get('docId'))
 
 
-
-@app.route("/get_contact_us/") #default method is get
+@app.route("/get_contact_us/")  # default method is get
 def get_contact_us():
     EV_Trendz = connect_mongo()
     ObjContactUs = EV_Trendz['Contact_Us']
@@ -158,13 +172,16 @@ def get_contact_us():
 
 
 #http://127.0.0.1:5000/send-mail/
-@app.route("/send-mail/",methods = ['POST', 'GET']) #default method is get
+
+
+@app.route("/send-mail/", methods=['POST', 'GET'])
 def sendmail():
+    rec = None
     if request.method == 'POST':
         rec = request.get_json()
         app.config.update(mail_settings)
         mail = Mail(app)
-        msg = replyEmail(rec.get('id'),rec.get('replyText'),rec.get('email'))
+        msg = replyEmail(rec.get('id'), rec.get('replyText'), rec.get('email'))
         mail.send(msg)
     return jsonify(recipients=rec.get('email'))
 

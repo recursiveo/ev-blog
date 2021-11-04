@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<!-- Coding by CodingLab | www.youtube.com/codinglabyt -->
+<html lang="en" dir="ltr" xmlns="http://www.w3.org/1999/html">
+  <head>
+    <meta charset="UTF-8">
+    <title> Login and Registration - EVTrends </title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='styles/styles_signup.css') }}">
+<!--     <script type="text/javascript" rel="script" src="{{ url_for('static', filename = 'js/login.js') }}"></script>-->
+    <!-- Fontawesome CDN Link -->
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   </head>
+
+<body>
+
+
+<!--    ------------------ Main Content - Start -------------------->
+<br>
+
+  <div class="container">
+      <div class="forms">
+        <div class="form-content">
+
+	  <!--    ------------------ Signup Form ------------------      -->
+        <div class="signup-form">
+          <div class="title">Signup</div>
+<!--          <div class="title">Please do signup for login!!</div>-->
+        <form method=POST action="{{ url_for('signup') }}">
+            <div class="input-boxes">
+              <div class="input-box">
+                <i class="fas fa-user"></i>
+                <input type="text" name="username" placeholder="Enter your name" required>
+              </div>
+              <div class="input-box">
+                <i class="fas fa-envelope"></i>
+                <input type="text" name="email" placeholder="Enter your email" required>
+              </div>
+              <div class="input-box">
+                <i class="fas fa-lock"></i>
+                <input type="password" name="pass" placeholder="Enter your password" required>
+              </div>
+              <div class="button input-box">
+                <input type="submit" value="Sumbit">
+              </div>
+            </br>
+            <div><a href="{{ url_for('login') }}">If you already have an account please do login!!</a></div>
+            </div>
+			<br>
+
+      </form>
+    </div>
+    </div>
+
+    </div>
+
+
+  </div>
+
+  <!--    ------------------ Main Content ------------------      -->
+
+
+</body>
+
+</html>
