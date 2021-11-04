@@ -1,0 +1,122 @@
+body {
+    background: url(image2.jpg);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+  
+}
+
+.form-control:focus {
+    box-shadow: none;
+    border-color: #5CDB95
+}
+
+.profile-button {
+    background: #5CDB95;
+    box-shadow: none;
+    border: none
+}
+
+.profile-button:hover {
+    background: #5CDB95
+}
+
+.profile-button:focus {
+    background: #5CDB95;
+    box-shadow: none
+}
+
+.profile-button:active {
+    background: #682773;
+    box-shadow: none
+}
+
+.back:hover {
+    color: #682773;
+    cursor: pointer
+}
+
+.labels {
+    font-size: 15px
+}
+
+.add-experience:hover {
+    background: #BA68C8;
+    color: #fff;
+    cursor: pointer;
+    border: solid 1px #BA68C8
+}
+
+h1 
+{text-align: center;
+    
+	color: grey;
+	font-weight: bold;
+
+}
+
+p {text-align: left;}
+div {
+    text-align: center;
+    padding-left:10px;
+	color: black;
+	font-weight: bold;
+	
+
+
+}
+
+.save{
+	text-align: center-left;
+	font-size: 50px;
+	color: black;
+	
+}
+
+.col-md-1{
+	text-align:left;
+    padding-left:50px;
+	padding-top: 20px;
+	font-weight: bold;
+color: black;
+	 
+}
+
+.col-md-2{
+	text-align:left;
+    padding-left:50px;
+	padding-top: 20px;
+	 color: black;
+	 font-weight: bold;
+}
+
+.col-md-3{
+	text-align:left;
+    padding-left:50px;
+	padding-top: 20px;
+	 color: black;
+}
+
+.col-md-4{
+	text-align:left;
+    padding-left:50px;
+	padding-top: 20px;
+	color: black; 
+	font-weight: bold;
+}
+
+.col-md-5{
+	text-align:left;
+    padding-left:50px;
+	padding-top: 20px;
+	color: black; 
+	font-weight: bold;
+}
+
+.col-md-6{
+	text-align:left;
+    padding-left:50px;
+	padding-top: 20px;
+	 color: black;
+	 font-weight: bold;
+}

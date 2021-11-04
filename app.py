@@ -1,5 +1,5 @@
-from flask import Flask, request, jsonify, render_template, session, flash
-from src.PyMongo_Operations import insert_mongo, search_mongo
+from flask import Flask, request, jsonify, render_template, session
+from src.PyMongo_Operations import insert_mongo, search_mongo, fetch_data
 import logging
 from src.logger import get_logger
 from src.process_reviews import Reviews
@@ -7,9 +7,10 @@ from src.ContactUs import insertContactUs, deleteEnquiry, replyTextUpodate, repl
 from src.MongoConnection import connect_mongo
 import json
 from flask_mail import Mail, Message
+from bson import json_util
 
 app = Flask(__name__)
-app.secret_key="4564544532643869758"
+app.secret_key = "4c21f6c4e88f098df86c2093e82c80b2"
 process_reviews = Reviews()
 
 logger = get_logger()
@@ -28,18 +29,16 @@ def index():
 @app.route('/login', methods=['POST', 'GET'])
 def login():
     if request.method == 'POST':
-        email = request.form['username']
-        password = request.form['pass']
+        session['email'] = email = request.form['username']
+        session['password'] = password = request.form['pass']
         data = {'email': email, 'password': password}
         existing_data = search_mongo(data)
         if existing_data:
+            print(session['email'])
             return render_template('index.html')
         else:
             return render_template('signup.html')
-    if 'username' not in session:
-        return render_template('login.html')
-    else:
-        return render_template('index.html')
+    return render_template('reg.html')
 
 
 @app.route('/signup', methods=['POST', 'GET'])
@@ -62,6 +61,19 @@ def signup():
 
     logging.info("Exiting from signup")
     return render_template('login.html')
+
+
+@app.route('/profile')
+def profile():
+    my_q = {"email": session['email']}
+    data = fetch_data(my_q)
+    a = []
+    print(session['email'])
+    for i in data:
+        a.append(json.loads(json_util.dumps(i['email'])))
+        a.append(json.loads(json_util.dumps(i['name'])))
+    print(a)
+    return render_template('profilepage.html')
 
 
 @app.route('/review-home')

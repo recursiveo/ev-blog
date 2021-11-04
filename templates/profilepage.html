@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='styles/style_profile.css') }}">
+</head>
+<body>
+
+<div class="container rounded bg-white mt-5 mb-5">
+    <div class="row">
+        <div class="col-md-3 border-right">
+        </div>
+        <div class="col-md-5 border-right">
+            <div class="p-3 py-5">
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                    <h4 class="text-right">USER DETAILS</h4>
+					
+                </div>
+            </div>
+                <div class="row mt-2">
+                    <div class="col-md-1"><label class="labels">FIRST NAME: </label> <br> <br> <input type="text" class="form-control" placeholder="first name" value=""></div><br>
+                    <div class="col-md-2"><label class="labels">SURNAME: </label> <br> <br> <input type="text" class="form-control" value="" placeholder="surname"></div><br>
+                </div>
+                <div class="row mt-3">
+                    <div class="col-md-3"><label class="labels">EMAIL ID:</label> <br> <br> <input type="text" class="form-control" placeholder="enter email id" value=""></div><br>
+                    <div class="col-md-4"><label class="labels">PASSWORD:</label> <br> <br> <input type="text" class="form-control" placeholder="enter password" value=""></div><br>
+                    <div class="col-md-5"><label class="labels">UPDATE PASSWORD:</label> <br> <br> <input type="text" class="form-control" placeholder="update password" value=""></div><br>
+                    <div class="col-md-6"><label class="labels">MOBILE NUMBER:</label> <br> <br> <input type="text" class="form-control" placeholder="enter phone number" value=""></div><br>
+                </div>
+				
+				<div class="save">
+				<input type="button" value="Save Profile" name="Save Profile" id="Save Profile" /><br>
+                </div>
+                
+            </div>
+        </div>
+       
+</div>
+</body>
+</html>

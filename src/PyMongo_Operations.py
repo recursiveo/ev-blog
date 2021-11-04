@@ -15,3 +15,8 @@ def search_mongo(data):
     return data
 
 
+def fetch_data(data):
+    ev_trendz = connect_mongo()
+    user_obj = ev_trendz['Signup']
+    data = user_obj.find(data)
+    return data
