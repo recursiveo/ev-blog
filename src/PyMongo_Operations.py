@@ -20,3 +20,11 @@ def fetch_data(data):
     user_obj = ev_trendz['Signup']
     data = user_obj.find(data)
     return data
+
+
+def update_data(data, updated_data):
+    ev_trendz = connect_mongo()
+    user_obj = ev_trendz['Signup']
+    print("daataaa", data)
+    data = user_obj.update(data, updated_data)
+    return True
