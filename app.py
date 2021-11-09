@@ -1,5 +1,6 @@
-from flask import Flask, request, jsonify, render_template, session
-from src.PyMongo_Operations import insert_mongo, search_mongo, fetch_data, update_data
+from flask import Flask, request, jsonify, render_template, session, flash
+from functools import wraps
+from src.PyMongo_Operations import insert_mongo, search_mongo, fetch_data, update_data, delete_data
 import logging
 from src.logger import get_logger
 from src.process_reviews import Reviews
@@ -19,9 +20,6 @@ logger = get_logger()
 @app.route('/')
 def index():
     logging.info("Entering into index")
-    if 'username' in session:
-        logging.info("User logged in")
-        return 'You are logged in as ' + session['username']
     logging.info("Exiting from index")
     return render_template('reg.html')
 
@@ -37,8 +35,22 @@ def login():
             print(session['email'])
             return render_template('index.html')
         else:
+            # flash("Please do register!!")
             return render_template('signup.html')
+    if 'email' in session:
+        return render_template('index.html')
     return render_template('reg.html')
+
+
+def login_required(f):
+    @wraps(f)
+    def wrap(*args, **kwargs):
+        if "email" in session:
+            return f(*args, **kwargs)
+        else:
+            flash("\"You shall not pass!\" - Gandalf")
+            return render_template('reg.html')
+    return wrap
 
 
 @app.route('/signup', methods=['POST', 'GET'])
@@ -64,9 +76,16 @@ def signup():
 
 
 @app.route('/profile', methods=['GET', 'POST'])
+@login_required
 def profile():
-    my_q = {"email": session['email']}
-    data = fetch_data(my_q)
+    errors = None
+    query_data = {"email": session['email']}
+    data = fetch_data(query_data)
+    count = search_mongo(query_data)
+    if count == 0:
+        errors = 'Invalid Credentials. Please try again.'
+        flash('User not found!!!')
+        return render_template('index.html', errors=errors)
     a = []
     print(session['email'])
     password = None
@@ -77,66 +96,71 @@ def profile():
         a.append(json.loads(json_util.dumps(i['name'])))
     print("aaaaaaaaaaaaaa", a)
     if request.method == "POST":
-        if all([request.form['password'], request.form['mobile'], request.form['name']]):
-            if password == request.form['password']:
-                update_data(my_q, {
+        if request.form['action'] == 'Submit':
+            if all([request.form['password'], request.form['mobile'], request.form['name']]):
+                if password == request.form['password']:
+                    update_data(query_data, {
+                        '$set': {
+                                     "name": request.form['name'],
+                                     "password": request.form['password'],
+                                     "mobile": request.form['mobile']
+                                 }
+                                 })
+
+            elif all([request.form['password'], request.form['mobile']]):
+                if password == request.form['password']:
+                    update_data(query_data, {
+                        '$set': {
+                                     "name": request.form['name'],
+                                     "password": request.form['password']
+                                 }
+                                 })
+
+            elif all([request.form['mobile'], request.form['name']]):
+                update_data(query_data, {
                     '$set': {
                                  "name": request.form['name'],
-                                 "password": request.form['password'],
                                  "mobile": request.form['mobile']
                              }
                              })
 
-        elif all([request.form['password'], request.form['mobile']]):
-            if password == request.form['password']:
-                update_data(my_q, {
+            elif all([request.form['password'], request.form['name']]):
+                if password == request.form['password']:
+                    update_data(query_data, {
+                        '$set': {
+                                     "name": request.form['name'],
+                                     "password": request.form['password']
+                                 }
+                                 })
+
+            elif request.form['password'] and not all([request.form['mobile'], request.form['name']]):
+                if password == request.form['password']:
+                    update_data(query_data, {
+                        '$set': {
+                                     "password": request.form['password']
+                                 }
+                                 })
+
+            elif request.form['mobile'] and not all([request.form['password'], request.form['name']]):
+                update_data(query_data, {
                     '$set': {
-                                 "name": request.form['name'],
-                                 "password": request.form['password']
+                                 "mobile": request.form['mobile']
                              }
                              })
 
-        elif all([request.form['mobile'], request.form['name']]):
-            update_data(my_q, {
-                '$set': {
-                             "name": request.form['name'],
-                             "mobile": request.form['mobile']
-                         }
-                         })
-
-        elif all([request.form['password'], request.form['name']]):
-            if password == request.form['password']:
-                update_data(my_q, {
-                    '$set': {
-                                 "name": request.form['name'],
-                                 "password": request.form['password']
+            elif request.form['name'] and not all([request.form['mobile'], request.form['name']]):
+                print("mmmmmyyyyy", query_data)
+                update_data(query_data,
+                             {'$set': {
+                                 "name": request.form['name']
                              }
-                             })
+                                 })
+        elif request.form['action'] == 'Delete':
+            data = delete_data(query_data)
+            session.pop('email', None)
+            return render_template('reg.html')
 
-        elif request.form['password'] and not all([request.form['mobile'], request.form['name']]):
-            if password == request.form['password']:
-                update_data(my_q, {
-                    '$set': {
-                                 "password": request.form['password']
-                             }
-                             })
-
-        elif request.form['mobile'] and not all([request.form['password'], request.form['name']]):
-            update_data(my_q, {
-                '$set': {
-                             "mobile": request.form['mobile']
-                         }
-                         })
-
-        elif request.form['name'] and not all([request.form['mobile'], request.form['name']]):
-            print("mmmmmyyyyy", my_q)
-            update_data(my_q,
-                         {'$set': {
-                             "name": request.form['name']
-                         }
-                         })
-
-    return render_template('profilepage.html', name=a[-1], email=session['email'])
+    return render_template('profilepage.html', error=errors, name=a[-1], email=session['email'])
 
 
 @app.route('/review-home')
@@ -259,6 +283,12 @@ def sendmail():
         msg = replyEmail(rec.get('id'), rec.get('replyText'), rec.get('email'))
         mail.send(msg)
     return jsonify(recipients=rec.get('email'))
+
+
+@app.route('/logout')
+def logout():
+    session.pop('email', None)
+    return render_template('reg.html')
 
 
 if __name__ == '__main__':

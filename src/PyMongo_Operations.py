@@ -28,3 +28,11 @@ def update_data(data, updated_data):
     print("daataaa", data)
     data = user_obj.update(data, updated_data)
     return True
+
+
+def delete_data(data):
+    ev_trendz = connect_mongo()
+    user_obj = ev_trendz['Signup']
+    print("daataaa", data)
+    data = user_obj.remove(data)
+    return data

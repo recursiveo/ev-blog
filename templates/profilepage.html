@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/html">
+<html xmlns="http://www.w3.org/1999/html" xmlns="http://www.w3.org/1999/html" xmlns="http://www.w3.org/1999/html"
+      xmlns="http://www.w3.org/1999/html">
 <head>
     <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='styles/style_profile.css') }}">
 </head>
@@ -32,15 +33,20 @@
                     <div class="col-md-5"><label class="labels">UPDATE PASSWORD:</label> <br> <br> <input type="text" name="update_password" class="form-control" placeholder="update password" value=""></div><br>
                     <div class="col-md-6"><label class="labels">MOBILE NUMBER:</label> <br> <br> <input type="text" name="mobile" class="form-control" placeholder="enter phone number" value=""></div><br>
                 </div>
-
+                </br>
 				<div class="button input-box">
-                <input type="submit" value="Sumbit">
-              </div>
+                <input name="action" type="submit" value="Submit">
+                &nbsp; &nbsp; &nbsp;
+                <input name="action" type="submit" value="Delete">
+                &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+                <a href="{{ url_for('login') }}">Back</a>
 
+              </div>
             </div>
             </form>
-          </div>
 
+          </div>
+    </div>
 </div>
 </body>
 </html>

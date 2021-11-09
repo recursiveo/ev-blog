@@ -4,11 +4,19 @@
     <meta charset="UTF-8">
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <title>Home - EVTrendz</title>
+    {% with messages = get_flashed_messages() %}
+   {% if messages %}
+     <ul class="flashes">
+        {% for message in messages %}
+         <div class="message_flash">{{ message }}</div>
+        {% endfor %}
+    </ul>
+  {% endif %}
+ {% endwith %}
     <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='styles/styles-main.css') }}">
 </head>
 <body>
 <header>
-    <h3>"hiiiiiii"</h3>
     <div class="navbar top-fixed">
         <img class="logo" src="../static/images/logo_cr.png">
         <nav>
@@ -22,6 +30,7 @@
                         <li><a href="contactUs">Contact Us</a></li>
                         <li><a href="#">About</a></li>
                         <li><a href="profile">Profile</a></li>
+                        <li><a href="logout">Logout</a></li>
                     </div>
                 </ul>
                 <svg class="caret" fill="currentColor" height="35" id="icon" viewBox="0 0 16 16"
