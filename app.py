@@ -61,7 +61,7 @@ def signup():
         logging.info("Result from data insertion into db {}".format(output))
 
     logging.info("Exiting from signup")
-    return render_template('login.html')
+    return render_template('reg.html')
 
 
 @app.route('/review-home')
@@ -184,6 +184,12 @@ def sendmail():
         msg = replyEmail(rec.get('id'), rec.get('replyText'), rec.get('email'))
         mail.send(msg)
     return jsonify(recipients=rec.get('email'))
+
+
+@app.route('/logout')
+def logout():
+    session.pop('email', None)
+    return render_template('reg.html')
 
 
 if __name__ == '__main__':
