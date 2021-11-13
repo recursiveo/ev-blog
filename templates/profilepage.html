@@ -6,7 +6,6 @@
 </head>
 <body>
 
-<div class="container rounded bg-white mt-5 mb-5">
     <div class="form">
         <div class="form-content">
 
@@ -15,13 +14,11 @@
         <div class="col-md-3 border-right">
         </div>
         <div class="col-md-5 border-right">
-            <div class="p-3 py-5">
                 <div class="d-flex justify-content-between align-items-center mb-3">
                     <h4 class="text-right">USER DETAILS</h4>
 
                 </div>
-            </div>
-
+            <div class="container">
                 <div class="row mt-2">
                     <div class="col-md-1"><label class="labels">NAME: </label> <br> <br> <input type="text" class="form-control" placeholder="name" value= {{name}}></div><br>
                     <div class="col-md-3"><label class="labels">EMAIL ID:</label> <br> <br> <input type="text" class="form-control" placeholder="email id" value={{email}}></div><br>
@@ -29,9 +26,9 @@
                 <div class="row mt-3">
 
                     <div class="col-md-2"><label class="labels">UPDATE NAME: </label> <br> <br> <input type="text" name="name" class="form-control" value="" placeholder="update name"></div><br>
-                    <div class="col-md-4"><label class="labels">PASSWORD:</label> <br> <br> <input type="text" name="password" class="form-control" placeholder="enter password" value=""></div><br>
-                    <div class="col-md-5"><label class="labels">UPDATE PASSWORD:</label> <br> <br> <input type="text" name="update_password" class="form-control" placeholder="update password" value=""></div><br>
-                    <div class="col-md-6"><label class="labels">MOBILE NUMBER:</label> <br> <br> <input type="text" name="mobile" class="form-control" placeholder="enter phone number" value=""></div><br>
+                    <div class="col-md-4"><label class="labels">PASSWORD:</label> <br> <br> <input type="text" name="password" class="form-control" placeholder="current password" value=""></div><br>
+                    <div class="col-md-5"><label class="labels">UPDATE PASSWORD:</label> <br> <br> <input type="text" name="update_password" class="form-control" placeholder="new password" value=""></div><br>
+                    <div class="col-md-6"><label class="labels">MOBILE NUMBER:</label> <br> <br> <input type="text" name="mobile" class="form-control" placeholder="enter phone number" value={{mobile}}></div><br>
                 </div>
                 </br>
 				<div class="button input-box">
@@ -43,10 +40,12 @@
 
               </div>
             </div>
-            </form>
+        </div>
 
+            </form>
           </div>
     </div>
+
 </div>
 </body>
 </html>

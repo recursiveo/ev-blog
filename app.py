@@ -86,37 +86,49 @@ def profile():
         errors = 'Invalid Credentials. Please try again.'
         flash('User not found!!!')
         return render_template('index.html', errors=errors)
-    a = []
+    a = {}
     print(session['email'])
     password = None
     for i in data:
         password = i['password']
         print("ppppp", password)
-        a.append(json.loads(json_util.dumps(i['email'])))
-        a.append(json.loads(json_util.dumps(i['name'])))
+        a['email'] = json.loads(json_util.dumps(i['email']))
+        print("name", i['name'])
+        a['name'] = json.loads(json_util.dumps(i['name']))
+        print("jsonnnn", a['name'])
+        if 'mobile' in i:
+            a['mobile'] = json.loads(json_util.dumps(i['mobile']))
+        else:
+            a['mobile'] = ''
+
     print("aaaaaaaaaaaaaa", a)
     if request.method == "POST":
         if request.form['action'] == 'Submit':
             if all([request.form['password'], request.form['mobile'], request.form['name']]):
+                a['mobile'] = request.form['mobile']
+                a['name'] = request.form['name']
                 if password == request.form['password']:
                     update_data(query_data, {
                         '$set': {
                                      "name": request.form['name'],
-                                     "password": request.form['password'],
+                                     "password": request.form['update_password'],
                                      "mobile": request.form['mobile']
                                  }
                                  })
 
             elif all([request.form['password'], request.form['mobile']]):
+                a['mobile'] = request.form['mobile']
                 if password == request.form['password']:
                     update_data(query_data, {
                         '$set': {
                                      "name": request.form['name'],
-                                     "password": request.form['password']
+                                     "password": request.form['update_password']
                                  }
                                  })
 
             elif all([request.form['mobile'], request.form['name']]):
+                a['mobile'] = request.form['mobile']
+                a['name'] = request.form['name']
                 update_data(query_data, {
                     '$set': {
                                  "name": request.form['name'],
@@ -125,11 +137,12 @@ def profile():
                              })
 
             elif all([request.form['password'], request.form['name']]):
+                a['name'] = request.form['name']
                 if password == request.form['password']:
                     update_data(query_data, {
                         '$set': {
                                      "name": request.form['name'],
-                                     "password": request.form['password']
+                                     "password": request.form['update_password']
                                  }
                                  })
 
@@ -137,18 +150,20 @@ def profile():
                 if password == request.form['password']:
                     update_data(query_data, {
                         '$set': {
-                                     "password": request.form['password']
+                                     "password": request.form['update_password']
                                  }
                                  })
 
             elif request.form['mobile'] and not all([request.form['password'], request.form['name']]):
+                a['mobile'] = request.form['mobile']
                 update_data(query_data, {
                     '$set': {
                                  "mobile": request.form['mobile']
                              }
                              })
 
-            elif request.form['name'] and not all([request.form['mobile'], request.form['name']]):
+            elif request.form['name'] and not all([request.form['mobile'], request.form['password']]):
+                a['name'] = request.form['name']
                 print("mmmmmyyyyy", query_data)
                 update_data(query_data,
                              {'$set': {
@@ -159,8 +174,7 @@ def profile():
             data = delete_data(query_data)
             session.pop('email', None)
             return render_template('reg.html')
-
-    return render_template('profilepage.html', error=errors, name=a[-1], email=session['email'])
+    return render_template('profilepage.html', error=errors, mobile=a['mobile'] if a['mobile'] else '', name=a['name'] if a['name'] else None, email=session['email'])
 
 
 @app.route('/review-home')
