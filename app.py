@@ -72,7 +72,7 @@ def signup():
         logging.info("Result from data insertion into db {}".format(output))
 
     logging.info("Exiting from signup")
-    return render_template('login.html')
+    return render_template('reg.html')
 
 
 @app.route('/profile', methods=['GET', 'POST'])
