@@ -76,6 +76,21 @@ def add_reviews():
 def edit_review():
     return render_template('edit-review.html')
 
+
+@app.route('/modify_review', methods=['POST'])
+def modify_review():
+    data = request.get_json()
+    res = process_reviews.modify_review(data)
+    return json.dumps(res)
+
+
+@app.route('/check_id', methods=['POST'])
+def check_id():
+    data = request.get_json()
+    res = process_reviews.check_id(data)
+    return json.dumps(res)
+
+
 @app.route('/contactUs/')
 def openContactUs():
     return render_template('ContactUs.html')

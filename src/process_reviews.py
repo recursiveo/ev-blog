@@ -18,7 +18,8 @@ class Reviews:
                     'name': i['name'],
                     'brand': i['brand'],
                     'model': i['model'],
-                    'review_text': i['review_text']
+                    'review_text': i['review_text'],
+                    'uid': i['uid']
                 }
                 li.append(obj)
             return li
@@ -39,6 +40,22 @@ class Reviews:
             upd_review = req_data['review_text']
             uid = req_data['uid']
             res = self.reviews_data.update_review(uid, upd_review)
+            return res
+        except Exception as e:
+            logger.error(e)
+            raise e
+
+    def check_id(self, data):
+        try:
+            res = self.reviews_data.check_id(data)
+            return res
+        except Exception as e:
+            logger.error(e)
+            raise e
+
+    def modify_review(self, data):
+        try:
+            res = self.reviews_data.modify_review(data)
             return res
         except Exception as e:
             logger.error(e)

@@ -88,6 +88,11 @@
     background-color: #45a049;
 }
 
+#submit-review:disabled {
+    background-color: #ccc;
+    cursor: auto;
+}
+
 .review-label {
     font-size: 1.4rem;
     margin-bottom: 10px;
@@ -160,9 +165,29 @@ textarea {
   resize: none;
 }
 
+textarea:disabled{
+    background-color: #ccc;
+}
+
 .bg-box-right{
     width: 50%;
     float: left;
+}
+
+.check{
+    width: 20%;
+    background-color: var(--eco);
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition-duration: 0.4s;
+}
+
+.check:hover{
+    background-color: #45a049;
 }
 
 
