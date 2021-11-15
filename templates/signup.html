@@ -4,6 +4,15 @@
   <head>
     <meta charset="UTF-8">
     <title> Login and Registration - EVTrends </title>
+    {% with messages = get_flashed_messages() %}
+    {% if messages %}
+     <ul class="flashes">
+        {% for message in messages %}
+         <div class="flash">{{ message }}</div>
+        {% endfor %}
+    </ul>
+  {% endif %}
+ {% endwith %}
     <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='styles/styles_signup.css') }}">
 <!--     <script type="text/javascript" rel="script" src="{{ url_for('static', filename = 'js/login.js') }}"></script>-->
     <!-- Fontawesome CDN Link -->

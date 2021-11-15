@@ -28,18 +28,22 @@ def index():
 @app.route('/login', methods=['POST', 'GET'])
 def login():
     if request.method == 'POST':
-        email = request.form['username']
-        password = request.form['pass']
+        session['email'] = email = request.form['username']
+        session['password'] = password = request.form['pass']
         data = {'email': email, 'password': password}
         existing_data = search_mongo(data)
         if existing_data:
             return render_template('index.html')
         else:
+            flash('Invalid Credentials. Please do register/login accordingly!!!')
             return render_template('signup.html')
-    if 'username' not in session:
-        return render_template('login.html')
-    else:
-        return render_template('index.html')
+    # if 'username' not in session:
+    #     print("lohhh")
+    #     return render_template('login.html')
+    # else:
+    #     print("indd")
+    #     return render_template('index.html')
+    return render_template('reg.html')
 
 
 @app.route('/signup', methods=['POST', 'GET'])
@@ -53,7 +57,8 @@ def signup():
         existing_user = search_mongo(data)
         logging.info(f'existing_user {existing_user}')
         if existing_user > 0:
-            return render_template('login.html')
+            flash("User already exist with this email id.Try to login or register with another mail id!!")
+            return render_template('signup.html')
         password = request.form['pass']
         username = request.form['username']
         logging.info('username and password {} {}'.format(username, password))

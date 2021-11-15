@@ -16,8 +16,18 @@ body{
   background: #b9bdbb;
   padding: 30px;
 }
+
+.flash {
+      border-color: #e96506;
+      color: darkviolet;
+      position: fixed;
+      top: 15px;
+      margin-left: 170px;
+}
+
 .container{
   position: relative;
+  top: 30px;
   max-width: 850px;
   width: 100%;
   background: #fff;
