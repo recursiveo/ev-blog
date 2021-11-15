@@ -35,10 +35,12 @@ def login():
             print(session['email'])
             return render_template('index.html')
         else:
-            # flash("Please do register!!")
+            flash('Invalid Credentials. Please do register/login accordingly!!!')
             return render_template('signup.html')
-    if 'email' in session:
-        return render_template('index.html')
+    # if 'username' not in session:
+    #     return render_template('login.html')
+    # else:
+    #     return render_template('index.html')
     return render_template('reg.html')
 
 
@@ -64,7 +66,8 @@ def signup():
         existing_user = search_mongo(data)
         logging.info(f'existing_user {existing_user}')
         if existing_user > 0:
-            return render_template('login.html')
+            flash("User already exist with this email id.Try to login or register with another mail id!!")
+            return render_template('signup.html')
         password = request.form['pass']
         username = request.form['username']
         logging.info('username and password {} {}'.format(username, password))

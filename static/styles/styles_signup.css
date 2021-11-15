@@ -16,8 +16,16 @@ body{
   background: #b9bdbb;
   padding: 30px;
 }
+
+.flash {
+      color: mediumblue;
+      position: fixed;
+      top: 15px;
+}
+
 .container{
   position: relative;
+  top: 30px;
   max-width: 400px;
   width: 100%;
   background: #fff;
