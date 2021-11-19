@@ -46,6 +46,14 @@ body {
     cursor: pointer
 }
 
+
+.message_flash {
+      color: mediumblue;
+      position: fixed;
+      top: 15px;
+      left: 550px;
+}
+
 .labels {
     font-size: 15px
 }
@@ -86,7 +94,7 @@ div {
 .col-md-1{
 	text-align:left;
     padding-left:50px;
-	padding-top: 20px;
+	padding-top: 10px;
 	font-weight: bold;
 color: black;
 	 
