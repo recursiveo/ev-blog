@@ -18,11 +18,10 @@ body{
 }
 
 .flash {
-      border-color: #e96506;
-      color: darkviolet;
+      color: mediumblue;
       position: fixed;
       top: 15px;
-      margin-left: 170px;
+      left: 550px;
 }
 
 .container{

@@ -37,10 +37,8 @@ def login():
         else:
             flash('Invalid Credentials. Please do register/login accordingly!!!')
             return render_template('signup.html')
-    # if 'username' not in session:
-    #     return render_template('login.html')
-    # else:
-    #     return render_template('index.html')
+    if 'email' in session:
+        return render_template('index.html')
     return render_template('reg.html')
 
 
@@ -50,7 +48,7 @@ def login_required(f):
         if "email" in session:
             return f(*args, **kwargs)
         else:
-            flash("\"You shall not pass!\" - Gandalf")
+            flash("\"You shall not pass!\" ")
             return render_template('reg.html')
     return wrap
 
@@ -106,7 +104,7 @@ def profile():
 
     if request.method == "POST":
         if request.form['action'] == 'Submit':
-            if all([request.form['password'], request.form['mobile'], request.form['name']]):
+            if all([request.form['password'], request.form['confirm_mobile'], request.form['confirm_name']]):
                 if request.form['update_password'] == request.form['confirm_password'] and request.form['mobile'] == request.form['confirm_mobile'] and request.form['name'] == request.form['confirm_name']:
                     a['mobile'] = request.form['mobile']
                     a['name'] = request.form['name']
@@ -127,7 +125,7 @@ def profile():
                 else:
                     flash("Data mismatch!!")
 
-            elif all([request.form['password'], request.form['mobile']]):
+            elif all([request.form['password'], request.form['confirm_mobile']]):
                 a['mobile'] = request.form['mobile']
                 if password == request.form['password']:
                     if request.form['update_password'] == request.form['confirm_password']:
@@ -140,16 +138,16 @@ def profile():
                                          })
                         else:
                             flash("Mobile number doesn't match. Please enter correct mobile!!")
-                            return render_template('profilepage.html')
                     else:
                         flash("Password mismatch. Please do confirm with new password!!")
                 else:
                     flash("Password mismatch. Please re-enter current password!!")
 
-            elif all([request.form['confirm_mobile'], request.form['mobile'], request.form['name']]):
-                a['mobile'] = request.form['mobile']
-                a['name'] = request.form['name']
-                if request.form['mobile'] == request.form['confirm_mobile'] and request.form['name'] == request.form['name']:
+            elif all([request.form['confirm_mobile'], request.form['confirm_name']]):
+                if request.form['mobile'] == request.form['confirm_mobile'] and request.form['name'] == request.form['confirm_name']:
+                    a['mobile'] = request.form['mobile']
+                    a['name'] = request.form['name']
+
                     update_data(query_data, {
                         '$set': {
                                      "name": request.form['name'],
@@ -158,12 +156,11 @@ def profile():
                                  })
                 else:
                     flash("Entered name/mobile number mismatch. Please do verify and re-enter it!!")
-                    # return render_template('profilepage.html')
 
             elif all([request.form['password'], request.form['name']]):
-                a['name'] = request.form['name']
                 if password == request.form['password']:
                     if request.form['update_password'] == request.form['confirm_password']:
+                        a['name'] = request.form['name']
                         update_data(query_data, {
                             '$set': {
                                          "name": request.form['name'],
@@ -189,8 +186,8 @@ def profile():
                     flash("Password mismatch. Please re-enter current password!!")
 
             elif request.form['mobile'] and request.form['confirm_mobile'] and not all([request.form['password'], request.form['name']]):
-                a['mobile'] = request.form['mobile']
                 if request.form['mobile'] == request.form['confirm_mobile']:
+                    a['mobile'] = request.form['mobile']
                     update_data(query_data, {
                         '$set': {
                                      "mobile": request.form['mobile']
@@ -200,14 +197,13 @@ def profile():
                     flash("Mobile number mismatch. Please do verify!!")
 
             elif request.form['name'] and not all([request.form['mobile'], request.form['password']]):
-                a['name'] = request.form['name']
-                print("mmmmmyyyyy", query_data)
                 if request.form['name'] == request.form['confirm_name']:
+                    a['name'] = request.form['name']
                     update_data(query_data,
-                                 {'$set': {
-                                     "name": request.form['name']
-                                 }
-                                     })
+                             {'$set': {
+                                 "name": request.form['name']
+                             }
+                                 })
                 else:
                     flash("Name mismatch. Please do verify!!")
 
