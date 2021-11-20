@@ -46,6 +46,7 @@ def login_required(f):
     @wraps(f)
     def wrap(*args, **kwargs):
         if "email" in session:
+            # need to improve
             return f(*args, **kwargs)
         else:
             flash("\"You shall not pass!\" ")
