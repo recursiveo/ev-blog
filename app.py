@@ -277,6 +277,10 @@ def edit_review():
 def openContactUs():
     return render_template('ContactUs.html')
 
+@app.route('/AboutUs/')
+def openAboutUs():
+    return render_template('AboutUs.html')
+
 @app.route("/open_Enquiry_page/")
 def openEnquiryPage():
     return render_template('EnquiryDetails.html')
