@@ -25,10 +25,12 @@
                 <ul class="responsive-text" id="menu">
                     <div class="menulist-container">
                         <li><a class="active" href="#">Home</a></li>
-                        <li><a href="#">Products</a></li>
-                        <li><a href="#">Technology</a></li>
+                        <li><a href="#">Reviews</a></li>
                         <li><a href="contactUs">Contact Us</a></li>
-                        <li><a href="#">About</a></li>
+                        <li><a href="AboutUs">About</a></li>
+                        {% if session["email"] == 'admin@evblog.com' %}
+                        <li><a href="{{ url_for('openEnquiryPage') }}">Enquiry Page</a></li>
+                        {% endif %}
                         <li><a href="profile">Profile</a></li>
                         <li><a href="logout">Logout</a></li>
                     </div>
@@ -55,7 +57,7 @@
         <p>
         <ul>
             <li><a href="{{ url_for('reviews') }}">Reviews-page</a></li>
-            <li><a href="#">PAGE 2</a></li>
+            <li><a href="{{ url_for('openEnquiryPage') }}">PAGE 2</a></li>
             <li><a href="#">PAGE 3</a></li>
             <li><a href="#">PAGE 4</a></li>
 

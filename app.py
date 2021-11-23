@@ -52,6 +52,7 @@ def login_required(f):
     @wraps(f)
     def wrap(*args, **kwargs):
         if "email" in session:
+            # need to improve
             return f(*args, **kwargs)
         else:
             flash("\"You shall not pass!\" ")
@@ -281,6 +282,10 @@ def edit_review():
 @app.route('/contactUs/')
 def openContactUs():
     return render_template('ContactUs.html')
+
+@app.route('/AboutUs/')
+def openAboutUs():
+    return render_template('AboutUs.html')
 
 @app.route("/open_Enquiry_page/")
 def openEnquiryPage():

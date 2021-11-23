@@ -39,7 +39,7 @@ function ngForFunctionality(anArray) {
 
 async function replyEmail(email,id,replyText) {
     debugger;
-    alert(email)
+    console.log(email)
     document.getElementById("loader").style.display="block";
     var obj = {'email':email , 'id':id , 'reply': replyText}
     let response = await fetch('/updateReply/',
