@@ -11,7 +11,7 @@ from flask_mail import Mail, Message
 from bson import json_util
 
 app = Flask(__name__)
-app.secret_key = "4c21f6c4e88f098df86c2093e82c80b2"
+app.secret_key="4564544532643869758"
 process_reviews = Reviews()
 
 logger = get_logger()
@@ -20,6 +20,9 @@ logger = get_logger()
 @app.route('/')
 def index():
     logging.info("Entering into index")
+    if 'username' in session:
+        logging.info("User logged in")
+        return 'You are logged in as ' + session['username']
     logging.info("Exiting from index")
     return render_template('reg.html')
 
@@ -32,13 +35,16 @@ def login():
         data = {'email': email, 'password': password}
         existing_data = search_mongo(data)
         if existing_data:
-            print(session['email'])
             return render_template('index.html')
         else:
             flash('Invalid Credentials. Please do register/login accordingly!!!')
             return render_template('signup.html')
-    if 'email' in session:
-        return render_template('index.html')
+    # if 'username' not in session:
+    #     print("lohhh")
+    #     return render_template('login.html')
+    # else:
+    #     print("indd")
+    #     return render_template('index.html')
     return render_template('reg.html')
 
 
