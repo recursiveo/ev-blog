@@ -2,8 +2,109 @@ body {
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
-  
+
 }
+
+:root {
+    --eco: #5CDB95;
+    --off-white: #f7f7f7;
+    --cap-violet: #3f48cc;
+    --hr-blue: #05386b
+}
+
+.center {
+    text-align: center;
+}
+
+.left {
+    text-align: left;
+}
+
+.right{
+    text-align: right;
+}
+
+.eco-green {
+    color: var(--eco);
+}
+
+/*-------------------------------------*/
+/*      >>> Header Styles <<<          */
+/*-------------------------------------*/
+
+.navbar {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    padding-left: 5%;
+    padding-right: 5%;
+    box-shadow: 0 0 6px 3px lightgray;
+    /*margin-bottom: 3rem;*/
+    background-color: white;
+    font-family: 'Source Sans Pro', sans-serif;
+    z-index: 2;
+}
+
+.top-fixed {
+    /* For Sticky Navbar */
+    position: fixed;
+    top: 0;
+}
+
+.logo {
+    width: 125px;
+    margin: 5px 0;
+    cursor: pointer;
+}
+
+nav {
+    flex: 1;
+    text-align: right;
+    /* font-weight: bold; */
+}
+
+nav ul {
+    /*max-height: 192px;*/
+    padding-bottom: 1rem;
+}
+
+
+nav ul li {
+    display: inline-block;
+    list-style: none;
+    margin-right: 30px;
+}
+
+nav ul li a {
+    text-decoration: none;
+    color: black;
+    font-size: 1.2rem;
+    padding: 0.6rem 1rem;
+    border-radius: 3px;
+    transition: 0.3s;
+}
+
+nav ul li a:hover {
+    background-color: var(--off-white);
+    transition: 0.3s;
+}
+
+nav ul li a.active {
+    color: var(--eco);
+}
+
+.caret {
+    display: none;
+}
+
+.menulist-container {
+    margin-top: 2vh;
+}
+
+nav input {
+    display: none;
+}
+
 
 .form-control:focus {
     box-shadow: none;
@@ -25,6 +126,7 @@ body {
   perspective: 2700px;
   margin-left: 420px;
   padding-bottom: 20px;
+  top: 40px;
 }
 
 .profile-button:hover {
@@ -65,30 +167,24 @@ body {
     border: solid 1px #BA68C8
 }
 
-h1 
-{text-align: center;
-    
+h1 {text-align: center;
 	color: grey;
 	font-weight: bold;
-
 }
 
 p {text-align: left;}
+
 div {
     text-align: center;
     padding-left:10px;
 	color: black;
-	font-weight: bold;
-	
-
-
 }
 
 .save{
 	text-align: center-left;
 	font-size: 50px;
 	color: black;
-	
+
 }
 
 .col-md-1{
@@ -96,8 +192,7 @@ div {
     padding-left:50px;
 	padding-top: 10px;
 	font-weight: bold;
-color: black;
-	 
+    color: black;
 }
 
 .col-md-2{
@@ -119,7 +214,7 @@ color: black;
 	text-align:left;
     padding-left:50px;
 	padding-top: 20px;
-	color: black; 
+	color: black;
 	font-weight: bold;
 }
 
@@ -127,7 +222,7 @@ color: black;
 	text-align:left;
     padding-left:50px;
 	padding-top: 1px;
-	color: black; 
+	color: black;
 	font-weight: bold;
 }
 

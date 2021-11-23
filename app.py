@@ -35,16 +35,16 @@ def login():
         data = {'email': email, 'password': password}
         existing_data = search_mongo(data)
         if existing_data:
+            print(session['email'])
             return render_template('index.html')
         else:
             flash('Invalid Credentials. Please do register/login accordingly!!!')
             return render_template('signup.html')
-    # if 'username' not in session:
-    #     print("lohhh")
-    #     return render_template('login.html')
-    # else:
-    #     print("indd")
-    #     return render_template('index.html')
+    if 'email' in session:
+        print("hiiiiiiiiiiii")
+        if session['email']:
+            return render_template('index.html')
+        return render_template('reg.html')
     return render_template('reg.html')
 
 
