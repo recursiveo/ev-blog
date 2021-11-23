@@ -15,11 +15,15 @@
             <div class="menu-wrapper">
                 <ul class="responsive-text" id="menu">
                     <div class="menulist-container">
-                        <li><a href="..\home_page\index.html">Home</a></li>
-                        <li><a href="..\product\jessin html and css\index.html">Products</a></li>
-                        <li><a href="..\technology\evi.html">Technology</a></li>
-                        <li><a href="..\Contact Us\index.html">Contact Us</a></li>
-                        <li><a class="active" href="..\About Us\index.html">About</a></li>
+                        <li><a href="{{ url_for('login') }}">Home</a></li>
+                        <li><a href="{{ url_for('reviews') }}">Reviews</a></li>
+                        <li><a href="{{ url_for('openContactUs') }}">Contact Us</a></li>
+                        <li><a class="active" href="{{ url_for('openAboutUs') }}">About</a></li>
+                        {% if session["email"] == 'admin@evblog.com' %}
+                        <li><a href="{{ url_for('openEnquiryPage') }}">Enquiry Page</a></li>
+                        {% endif %}
+                        <li><a href="{{ url_for('profile') }}">Profile</a></li>
+                        <li><a href="{{ url_for('logout') }}">Logout</a></li>
                     </div>
                 </ul>
                 <svg class="caret" fill="currentColor" height="35" id="icon" viewBox="0 0 16 16"
@@ -56,7 +60,7 @@
 				</p>
 
                 <ul class = "links">
-                    <li><a href = "..\Contact Us\index.html">Contact Us</a></li>
+                    <li><a href = "{{ url_for('openContactUs') }}">Contact Us</a></li>
                 </ul>
 
                 <ul class = "icons">
