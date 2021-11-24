@@ -2,6 +2,7 @@
 <html xmlns="http://www.w3.org/1999/html" xmlns="http://www.w3.org/1999/html" xmlns="http://www.w3.org/1999/html"
       xmlns="http://www.w3.org/1999/html">
 <head>
+    <meta http-equiv=”refresh” content=”60;profilepage.html” />
     {% with messages = get_flashed_messages() %}
 
    {% if messages %}
@@ -26,7 +27,7 @@
             <div class="menu-wrapper">
                 <ul class="responsive-text" id="menu">
                     <div class="menulist-container">
-                        <li><a href="{{ url_for('login') }}">Home</a></li>
+                        <li><a href="{{ url_for('home') }}">Home</a></li>
                         <li><a href="{{ url_for('reviews') }}">Reviews</a></li>
                         <li><a href="{{ url_for('openContactUs') }}">Contact Us</a></li>
                         <li><a href="{{ url_for('openAboutUs') }}">About</a></li>
