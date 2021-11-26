@@ -32,6 +32,11 @@ def index():
     return render_template('reg.html')
 
 
+# @app.route('/relogin', methods=['GET'])
+# def relogin():
+#     return render_template('reg.html')
+
+
 @app.route('/login', methods=['POST', 'GET'])
 def login():
     if request.method == 'POST':
@@ -93,7 +98,7 @@ def home():
     if 'email' in session:
         if session['email']:
             return render_template('index.html')
-    pass
+    return render_template('reg.html')
 
 
 @app.route('/profile', methods=['GET', 'POST'])
@@ -136,7 +141,6 @@ def profile():
                                              })
                             else:
                                 flash("Password mismatch. Please do confirm with new password!!")
-                                return render_template('profilepage.html')
                         else:
                             flash("Password mismatch. Please re-enter current password!!")
                     else:
@@ -223,15 +227,13 @@ def profile():
                                      })
                     else:
                         flash("Name mismatch. Please do verify!!")
-
             elif request.form['action'] == 'Delete':
                 data = delete_data(query_data)
                 session.pop('email', None)
                 return render_template('reg.html')
-            return redirect('http://127.0.0.1:7000/login')
-        else:
-            return render_template('profilepage.html', error=errors, mobile=a['mobile'] if a['mobile'] else '',
-                               name=a['name'] if a['name'] else None, email=session['email'])
+
+        return render_template('profilepage.html', error=errors, mobile=a['mobile'] if a['mobile'] else '',
+                           name=a['name'] if a['name'] else None, email=session['email'])
     except Exception as e:
         flash('Please do login!!!!')
         return render_template('reg.html')

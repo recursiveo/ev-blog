@@ -152,8 +152,8 @@ nav input {
 .message_flash {
       color: mediumblue;
       position: fixed;
-      top: 15px;
-      left: 550px;
+      top: 83px;
+      left: 43%;
 }
 
 .labels {
@@ -190,7 +190,7 @@ div {
 .col-md-1{
 	text-align:left;
     padding-left:50px;
-	padding-top: 10px;
+	padding-top: 20px;
 	font-weight: bold;
     color: black;
 }
@@ -198,7 +198,7 @@ div {
 .col-md-2{
 	text-align:left;
     padding-left:50px;
-	padding-top: 20px;
+	padding-top: 10px;
 	 color: black;
 	 font-weight: bold;
 }
@@ -206,14 +206,14 @@ div {
 .col-md-3{
 	text-align:left;
     padding-left:50px;
-	padding-top: 20px;
+	padding-top: 5px;
 	 color: black;
 }
 
 .col-md-4{
 	text-align:left;
     padding-left:50px;
-	padding-top: 20px;
+	padding-top: 10px;
 	color: black;
 	font-weight: bold;
 }
@@ -221,7 +221,7 @@ div {
 .col-md-5{
 	text-align:left;
     padding-left:50px;
-	padding-top: 1px;
+	padding-top: 87px;
 	color: black;
 	font-weight: bold;
 }
