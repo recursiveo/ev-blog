@@ -49,3 +49,32 @@ class GetData:
         except Exception as e:
             logger.error(e)
             raise e
+
+    def check_id(self, data):
+        try:
+            res = self.reviews_collection.find_one({'uid': data})
+            # print(res)
+            return res['review_text'] if res is not None else 'NULL'
+        except Exception as e:
+            logger.error(e)
+            raise e
+
+    def modify_review(self, data):
+        try:
+            print(data)
+            res = self.reviews_collection.update_one({'uid': data['uid']},
+                                                     {'$set': {'review_text': data['review_text']}})
+            print(res.modified_count)
+            return '1'
+        except Exception as e:
+            logger.error(e)
+            raise e
+
+    def delete_review(self, data):
+        try:
+            query = {"uid": data['uid']}
+            res = self.reviews_collection.delete_one(query)
+            return res.deleted_count
+        except Exception as e:
+            logger.error(e)
+            raise e

@@ -273,6 +273,31 @@ def add_reviews():
 def edit_review():
     return render_template('edit-review.html')
 
+
+@app.route('/modify_review', methods=['POST'])
+def modify_review():
+    data = request.get_json()
+    res = process_reviews.modify_review(data)
+    return json.dumps(res)
+
+
+@app.route('/check_id', methods=['POST'])
+def check_id():
+    data = request.get_json()
+    res = process_reviews.check_id(data)
+    return json.dumps(res)
+
+@app.route('/delete-review', methods=['GET'])
+def delete_review_view():
+    return render_template('delete-review.html')
+
+@app.route('/delete_review', methods=['POST'])
+def delete_review():
+    data = request.get_json()
+    res = process_reviews.delete_review(data)
+    return json.dumps(res)
+
+
 @app.route('/contactUs/')
 def openContactUs():
     return render_template('ContactUs.html')
