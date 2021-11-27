@@ -49,26 +49,25 @@
         <div class="review-bg-box">
             <div class="border-box">
                 <div class="review-column-right">
-                    <h1>Edit Review</h1>
+                    <h1>Delete Review</h1>
                     <div class="input-area">
-                        <form action="javascript: check_id(this) ">
+                        <form action="javascript: check_id_to_delete(this) ">
                             <label for="id">
                                 Review ID:
                             </label>
-                            <input type="text" placeholder="Enter Id" required id="id">
+                            <input type="text" placeholder="Enter Id" required id="id_to_del">
                             <button type="submit" value="Check ID" class="check">Check ID</button>
                             </form>
-                        <form action="javascript:edit_review() ">
+                        <form action="javascript:delete_review()">
                           <!--  <div>ID : <span id="review_id"></span></div>  -->
                             <textarea rows="10"
                                   cols="50"
-                                  placeholder="Enter valid post ID to edit"
+                                  placeholder="Enter valid post ID to delete"
                                   id="review" required disabled="disabled"></textarea>
                         <br>
-                        <input type="submit" value="Edit Review" name="submit" id="submit-review" disabled>
+                        <input type="submit" value="Delete Review" name="submit" id="delete_review" disabled>
 
                         </form>
-
                     </div>
 
                 </div>

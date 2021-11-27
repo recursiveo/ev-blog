@@ -60,3 +60,11 @@ class Reviews:
         except Exception as e:
             logger.error(e)
             raise e
+
+    def delete_review(self, data):
+        try:
+            res = self.reviews_data.delete_review(data)
+            return res
+        except Exception as e:
+            logger.error(e)
+            raise e

@@ -59,12 +59,22 @@ class GetData:
             logger.error(e)
             raise e
 
-    def modify_review(self,data):
+    def modify_review(self, data):
         try:
             print(data)
-            res = self.reviews_collection.update_one({'uid': data['uid']}, {'$set':{'review_text':data['review_text']}})
+            res = self.reviews_collection.update_one({'uid': data['uid']},
+                                                     {'$set': {'review_text': data['review_text']}})
             print(res.modified_count)
             return '1'
+        except Exception as e:
+            logger.error(e)
+            raise e
+
+    def delete_review(self, data):
+        try:
+            query = {"uid": data['uid']}
+            res = self.reviews_collection.delete_one(query)
+            return res.deleted_count
         except Exception as e:
             logger.error(e)
             raise e

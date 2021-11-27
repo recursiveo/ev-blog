@@ -93,6 +93,11 @@
     cursor: auto;
 }
 
+#delete_review:disabled {
+    background-color: #ccc;
+    cursor: auto;
+}
+
 .review-label {
     font-size: 1.4rem;
     margin-bottom: 10px;

@@ -90,6 +90,16 @@ def check_id():
     res = process_reviews.check_id(data)
     return json.dumps(res)
 
+@app.route('/delete-review', methods=['GET'])
+def delete_review_view():
+    return render_template('delete-review.html')
+
+@app.route('/delete_review', methods=['POST'])
+def delete_review():
+    data = request.get_json()
+    res = process_reviews.delete_review(data)
+    return json.dumps(res)
+
 
 @app.route('/contactUs/')
 def openContactUs():
