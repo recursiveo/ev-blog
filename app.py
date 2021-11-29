@@ -229,6 +229,7 @@ def profile():
                         flash("Name mismatch. Please do verify!!")
             elif request.form['action'] == 'Delete':
                 data = delete_data(query_data)
+                logging.info("Data for delete", data)
                 session.pop('email', None)
                 return render_template('reg.html')
 
