@@ -23,7 +23,7 @@
             <input type="checkbox"/>
             <div class="menu-wrapper">
                 <ul class="responsive-text" id="menu">
-                   <div class="menulist-container">
+                    <div class="menulist-container">
                         <li><a href="{{ url_for('login') }}">Home</a></li>
                         <li><a class="active" href="{{ url_for('reviews') }}">Reviews</a></li>
                         <li><a href="{{ url_for('openContactUs') }}">Contact Us</a></li>
@@ -53,37 +53,25 @@
         <div class="review-bg-box">
             <div class="border-box">
                 <div class="review-column-right">
-                    <h1>Add Review</h1>
+                    <h1>Delete Review</h1>
                     <div class="input-area">
-                        <form action="javascript:submit_review()">
-                            <label for="car-brand">Select Brand</label>
-                        <select name="car" id="car-brand" required>
-                            <option value="">None</option>
-                            <option value="volvo">Volvo</option>
-                            <option value="BMW" >BMW</option>
-                            <option value="mercedes">Mercedes</option>
-                            <option value="audi">Audi</option>
-                        </select>
-                        <br>
-                        <label for="car-type">Select Model</label>
-                        <select name="car" id="car-model" required>
-                            <option value="">None</option>
-                            <option value="Alpha Series" >Alpha Series</option>
-                            <option value="Beta Series">Beta Series</option>
-                            <option value="Gamma Series">Gamma Series</option>
-                            <option value="Delta Series">Delta Series</option>
-                        </select>
-                        <br>
-                        <!-- <label for="review"> Review </label><br>  -->
-                        <textarea rows="10"
+                        <form action="javascript: check_id_to_delete(this) ">
+                            <label for="id">
+                                Review ID:
+                            </label>
+                            <input type="text" placeholder="Enter Id" required id="id_to_del">
+                            <button type="submit" value="Check ID" class="check">Check ID</button>
+                            </form>
+                        <form action="javascript:delete_review()">
+                          <!--  <div>ID : <span id="review_id"></span></div>  -->
+                            <textarea rows="10"
                                   cols="50"
-                                  placeholder="Add your Review"
-                                  id="review" required></textarea>
+                                  placeholder="Enter valid post ID to delete"
+                                  id="review" required disabled="disabled"></textarea>
                         <br>
-                        <input type="submit" value="submit" name="submit" id="submit-review">
+                        <input type="submit" value="Delete Review" name="submit" id="delete_review" disabled>
 
                         </form>
-
                     </div>
 
                 </div>

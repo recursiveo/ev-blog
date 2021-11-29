@@ -24,11 +24,15 @@
             <div class="menu-wrapper">
                 <ul class="responsive-text" id="menu">
                     <div class="menulist-container">
-                        <li><a class="active" href="#">Reviews</a></li>
-                        <li><a href="#">Products</a></li>
-                        <li><a href="#">Technology</a></li>
-                        <li><a href="#">Contact Us</a></li>
-                        <li><a href="#">About</a></li>
+                        <li><a href="{{ url_for('login') }}">Home</a></li>
+                        <li><a class="active" href="{{ url_for('reviews') }}">Reviews</a></li>
+                        <li><a href="{{ url_for('openContactUs') }}">Contact Us</a></li>
+                        <li><a href="{{ url_for('openAboutUs') }}">About</a></li>
+                        {% if session["email"] == 'admin@evblog.com' %}
+                        <li><a href="{{ url_for('openEnquiryPage') }}">Enquiry Page</a></li>
+                        {% endif %}
+                        <li><a href="{{ url_for('profile') }}">Profile</a></li>
+                        <li><a href="{{ url_for('logout') }}">Logout</a></li>
                     </div>
                 </ul>
                 <svg class="caret" fill="currentColor" height="35" id="icon" viewBox="0 0 16 16"
@@ -51,18 +55,21 @@
                 <div class="review-column-right">
                     <h1>Edit Review</h1>
                     <div class="input-area">
-                        <form action="javascript: ">                    <!-- TODO: add submit function -->
-                            <label>
+                        <form action="javascript: check_id(this) ">
+                            <label for="id">
                                 Review ID:
-
                             </label>
-                            <input type="text" placeholder="Enter Id" required>
+                            <input type="text" placeholder="Enter Id" required id="id">
+                            <button type="submit" value="Check ID" class="check">Check ID</button>
+                            </form>
+                        <form action="javascript:edit_review() ">
+                          <!--  <div>ID : <span id="review_id"></span></div>  -->
                             <textarea rows="10"
                                   cols="50"
-                                  placeholder="Add your Review"
-                                  id="review" required></textarea>
+                                  placeholder="Enter valid post ID to edit"
+                                  id="review" required disabled="disabled"></textarea>
                         <br>
-                        <input type="submit" value="submit" name="submit" id="submit-review">
+                        <input type="submit" value="Edit Review" name="submit" id="submit-review" disabled>
 
                         </form>
 

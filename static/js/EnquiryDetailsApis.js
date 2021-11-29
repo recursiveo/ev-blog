@@ -39,7 +39,9 @@ function ngForFunctionality(anArray) {
 
 async function replyEmail(email,id,replyText) {
     debugger;
-    console.log(email)
+    if(replyText != "")
+    {
+        console.log(email)
     document.getElementById("loader").style.display="block";
     var obj = {'email':email , 'id':id , 'reply': replyText}
     let response = await fetch('/updateReply/',
@@ -56,6 +58,12 @@ async function replyEmail(email,id,replyText) {
       } else {
         alert("HTTP-Error: " + response.status);
       }
+
+    }
+    else
+    {
+        alert("Please Enter a Reply Text!")
+    }
 
 
 
