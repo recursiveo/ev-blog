@@ -7,15 +7,20 @@ function $(id) {
     return document.getElementById(id);
 }
 
-var submit_review = async () => {
-    var review = {
+let submit_review = async () => {
+    let review = {
         name: 'username',
         brand: $('car-brand').value,
         model: $('car-model').value,
         review_text: $('review').value
     };
     console.log(review)
-    var res = await fetch('/submit-review', {
+    $('msg_area').innerHTML = "Please wait...";
+    $('submit-review').disabled = true;
+    $('car-brand').disabled = true;
+    $('car-model').disabled = true;
+    $('review').disabled = true;
+    let res = await fetch('/submit-review', {
         method: 'POST',
         headers: {"Content-type": "application/json"},
         body: JSON.stringify(review)
@@ -24,16 +29,33 @@ var submit_review = async () => {
     if (res && res.ok) {
         let json = res.json();
         console.log(json);
+        $('msg_area').innerHTML = "";
+        alert("*** Review Posted ***");
+        $('submit-review').disabled = false;
+        $('car-brand').disabled = false;
+        $('car-model').disabled = false;
+        $('review').disabled = false;
     } else {
         console.log("Error : " + res.status);
     }
 }
 
-var goto_reviews = () => {
+let goto_reviews = () => {
 
-    $('show-reviews').onclick = function () {
-        location.href = '/reviews';
-    }
+    // $('show-reviews').onclick = function () {
+    //     location.href = '/reviews';
+    // }
+    let brand = $('car').value;
+    let url_string = '/reviews?brand='+brand
+    fetch(url_string).then(
+        response => {
+            return response.text();
+        }
+    ).then(
+        res => {
+            document.body.innerHTML = res;
+        }
+    )
 }
 
 function goto_add_review(){
@@ -84,6 +106,9 @@ function edit_review(){
     let id = id_to_edit;
     let review_text = $('review').value;
     console.log(review_text);
+    $('submit-review').disabled = true;
+    $('msg_area').innerHTML = "Please wait...";
+
     fetch('/modify_review',{
         method: 'POST',
         headers: { 'Content-type': 'application/json'},
@@ -93,12 +118,18 @@ function edit_review(){
     ).then(
         res => {
             console.log(res);
+            $('msg_area').innerHTML = "";
+            alert("*** Your review changes are posted ***");
+            $('submit-review').disabled = false;
+
         }
     )
 }
 
 function delete_review(){
     console.log(id_to_del)
+    $('delete_review').disabled = true;
+    $('msg_area').innerHTML = "Please wait...";
     fetch('/delete_review', {
         method: 'POST',
         headers: {'Content-type' : 'application/json'},
@@ -109,6 +140,10 @@ function delete_review(){
         }
     ).then(res => {
         console.log(res);
+        $('msg_area').innerHTML = "";
+         alert("*** Review Deleted ***");
+
+          $('delete_review').disabled = false;
         }
     )
 }

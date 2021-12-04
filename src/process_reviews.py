@@ -9,9 +9,9 @@ class Reviews:
     def __init__(self):
         self.reviews_data = GetData()
 
-    def get_reviews(self):
+    def get_reviews(self,req_data):
         try:
-            data = self.reviews_data.get_reviews_from_db()
+            data = self.reviews_data.get_reviews_from_db(req_data)
             li = list()
             for i in data:
                 obj = {
@@ -27,9 +27,9 @@ class Reviews:
             logger.error(e)
             raise e
 
-    def set_review_data(self, data):
+    def set_review_data(self, data, email):
         try:
-            res = self.reviews_data.set_review_data(data)
+            res = self.reviews_data.set_review_data(data, email)
             return res
         except Exception as e:
             logger.error(e)
@@ -45,9 +45,9 @@ class Reviews:
             logger.error(e)
             raise e
 
-    def check_id(self, data):
+    def check_id(self, data, email):
         try:
-            res = self.reviews_data.check_id(data)
+            res = self.reviews_data.check_id(data, email)
             return res
         except Exception as e:
             logger.error(e)
