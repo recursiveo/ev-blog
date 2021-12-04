@@ -271,7 +271,8 @@ def submit_review():
     try:
         data = request.get_json()
         logger.info(data)
-        res = process_reviews.set_review_data(data)
+        email = {"email": session['email']}
+        res = process_reviews.set_review_data(data, email)
         if res:
             return {'status': 'review updated'}, 200
         else:

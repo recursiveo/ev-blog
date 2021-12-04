@@ -27,9 +27,9 @@ class Reviews:
             logger.error(e)
             raise e
 
-    def set_review_data(self, data):
+    def set_review_data(self, data, email):
         try:
-            res = self.reviews_data.set_review_data(data)
+            res = self.reviews_data.set_review_data(data, email)
             return res
         except Exception as e:
             logger.error(e)

@@ -1,7 +1,10 @@
 import uuid
 
+import flask_login
+
 from src.logger import get_logger
 from src.mongo_connection import connect_mongo
+from src.PyMongo_Operations import fetch_data
 
 logger = get_logger()
 
@@ -15,16 +18,20 @@ class GetData:
 
     def get_reviews_from_db(self):
         try:
+            # print(flask_login.current_user)
             data = self.reviews_collection.find({})
             return data
         except Exception as e:
             logger.error(e)
             raise e
 
-    def set_review_data(self, data):
+    def set_review_data(self, data, email):
         try:
+            __user_data = self.__get_user_details(email)
             uid = uuid.uuid4().hex
             data['uid'] = uid
+            data['name'] = __user_data['name']
+            data['email'] = __user_data['email']
 
             logger.info(f'Inserting document uid: {uid}')
             res = self.reviews_collection.insert_one(data)
@@ -75,6 +82,15 @@ class GetData:
             query = {"uid": data['uid']}
             res = self.reviews_collection.delete_one(query)
             return res.deleted_count
+        except Exception as e:
+            logger.error(e)
+            raise e
+
+    def __get_user_details(self, email):
+        try:
+            data = fetch_data(email)
+            for rec in data:
+                return rec
         except Exception as e:
             logger.error(e)
             raise e
