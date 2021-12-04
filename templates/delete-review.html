@@ -54,12 +54,14 @@
             <div class="border-box">
                 <div class="review-column-right">
                     <h1>Delete Review</h1>
+                    <h3 style="color: darkgray">*** Delete any review you posted ***</h3>
                     <div class="input-area">
+                        <div id="msg_area" style="color: darkred; font-size: 1.5rem;"></div>
                         <form action="javascript: check_id_to_delete(this) ">
                             <label for="id">
                                 Review ID:
                             </label>
-                            <input type="text" placeholder="Enter Id" required id="id_to_del">
+                            <input type="text" placeholder="Enter Id. Only reviews you posted can be deleted" required id="id_to_del">
                             <button type="submit" value="Check ID" class="check">Check ID</button>
                             </form>
                         <form action="javascript:delete_review()">

@@ -55,24 +55,20 @@
                 <div class="review-column-right">
                     <h1>Add Review</h1>
                     <div class="input-area">
+                        <div id="msg_area" style="color: darkred; font-size: 1.5rem;"></div>
                         <form action="javascript:submit_review()">
                             <label for="car-brand">Select Brand</label>
                         <select name="car" id="car-brand" required>
                             <option value="">None</option>
                             <option value="volvo">Volvo</option>
-                            <option value="BMW" >BMW</option>
+                            <option value="bmw" >BMW</option>
+                            <option value="tesla">Tesla</option>
                             <option value="mercedes">Mercedes</option>
                             <option value="audi">Audi</option>
                         </select>
                         <br>
-                        <label for="car-type">Select Model</label>
-                        <select name="car" id="car-model" required>
-                            <option value="">None</option>
-                            <option value="Alpha Series" >Alpha Series</option>
-                            <option value="Beta Series">Beta Series</option>
-                            <option value="Gamma Series">Gamma Series</option>
-                            <option value="Delta Series">Delta Series</option>
-                        </select>
+                        <label for="car-model">Select Model</label>
+                        <input type="text" name="car" id="car-model" required placeholder="model (eg: Tesla model 3)">
                         <br>
                         <!-- <label for="review"> Review </label><br>  -->
                         <textarea rows="10"

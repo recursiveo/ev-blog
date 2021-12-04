@@ -51,6 +51,7 @@
         </div>
     </section>
     <section class="responsive-text">
+    {%  if list_data %}
         {% for item in list_data %}
             <div class="row">
                 <div class="column-left content-left-margin flex-main">
@@ -62,7 +63,7 @@
                         <br>
                         <p>
                             <b>
-                                <span id="brand">{{ item['brand'] }}</span>
+                                <span id="brand">{{ item['brand'].upper() }}</span>
                                 :&nbsp&nbsp
                                 <span id="model">{{ item['model'] }}</span>
                             </b>
@@ -74,6 +75,18 @@
             </div>
             <hr class="hr2-right">
         {% endfor %}
+    {% else %}
+        <div class="row">
+                <div class="column-left content-left-margin flex-main">
+                    <div class="box-content">
+                        <p>
+                            <i id="data" class="uname"> No Reviews Yet</i>
+                        </p>
+                    </div>
+                </div>
+            </div>
+    {% endif %}
+
     </section>
 </main>
 

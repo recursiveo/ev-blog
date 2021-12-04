@@ -259,7 +259,7 @@ def reviews():
 @app.route('/reviews', methods=['GET'])
 def show_reviews():
     try:
-        data = process_reviews.get_reviews()
+        data = process_reviews.get_reviews(request.args['brand'])
         return render_template('view-reviews.html', list_data=data)
     except Exception as e:
         logger.error(e)
@@ -316,7 +316,8 @@ def modify_review():
 @app.route('/check_id', methods=['POST'])
 def check_id():
     data = request.get_json()
-    res = process_reviews.check_id(data)
+    email = {"email": session['email']}
+    res = process_reviews.check_id(data, email)
     return json.dumps(res)
 
 @app.route('/delete-review', methods=['GET'])
