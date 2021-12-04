@@ -12,7 +12,7 @@ from flask_mail import Mail, Message
 from bson import json_util
 
 app = Flask(__name__)
-app.secret_key="4564544532643869758"
+app.secret_key="4564878532643869758"
 process_reviews = Reviews()
 
 logger = get_logger()
