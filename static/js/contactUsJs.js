@@ -19,9 +19,7 @@ function contactUsSubmission(name,email,country,subject)
         send_contactUs_details()
 
     }
-
 }
-
 
 async function send_mail()
 {
@@ -35,7 +33,6 @@ async function send_mail()
       }
 }
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
 
 async function send_contactUs_details()
 {
@@ -54,7 +51,6 @@ async function send_contactUs_details()
         alert("HTTP-Error: " + response.status);
       }
 }
-
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 

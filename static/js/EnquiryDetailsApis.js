@@ -23,7 +23,6 @@ async function getEnqDetails()
     //document.getElementById("enqDetail").innerHTML = data;
 }
 
-
 function ngForFunctionality(anArray) {
     debugger;
         let value = '';
@@ -65,10 +64,7 @@ async function replyEmail(email,id,replyText) {
         alert("Please Enter a Reply Text!")
     }
 
-
-
     }
-
 
 async function sendReplyEmail(email,id,replyText) {
 
@@ -88,8 +84,6 @@ async function sendReplyEmail(email,id,replyText) {
       }
 
 }
-
-
 async function deleteQuery(docId) {
 
     document.getElementById("loader").style.display="block";
