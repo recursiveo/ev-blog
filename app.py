@@ -57,18 +57,6 @@ def login():
     return render_template('reg.html')
 
 
-# def login_required(f):
-#     @wraps(f)
-#     def wrap(*args, **kwargs):
-#         if "email" in session:
-#             # need to improve
-#             return f(*args, **kwargs)
-#         else:
-#             flash("\"You shall not pass!\" ")
-#             return render_template('reg.html')
-#     return wrap
-
-
 @app.route('/signup', methods=['POST', 'GET'])
 def signup():
     logging.info("Entering into signup")
@@ -95,20 +83,24 @@ def signup():
 @app.route('/home', methods=['GET'])
 @login_manager.user_loader
 def home():
+    logging.info("Entering into home page")
     if 'email' in session:
         if session['email']:
             return render_template('index.html')
+    logging.info("Exiting from home")
     return render_template('reg.html')
 
 
 @app.route('/profile', methods=['GET', 'POST'])
 def profile():
     try:
+        logging.info("Entering into profile")
         errors = None
         query_data = {"email": session['email']}
         data = fetch_data(query_data)
         count = search_mongo(query_data)
         if count == 0:
+            logging.info("Invalid data")
             errors = 'Invalid Credentials. Please try again.'
             flash('User not found!!!')
             return render_template('index.html', errors=errors)
@@ -126,6 +118,7 @@ def profile():
 
         if request.method == "POST":
             if request.form['action'] == 'Submit':
+                logging.info("Data to get displayed", data)
                 if all([request.form['password'], request.form['confirm_mobile'], request.form['confirm_name']]):
                     if request.form['update_password'] == request.form['confirm_password'] and request.form['mobile'] == request.form['confirm_mobile'] and request.form['name'] == request.form['confirm_name']:
                         a['mobile'] = request.form['mobile']
@@ -233,10 +226,12 @@ def profile():
                 session.pop('email', None)
                 return render_template('reg.html')
 
+        logging.info("Exiting from profile")
         return render_template('profilepage.html', error=errors, mobile=a['mobile'] if a['mobile'] else '',
                            name=a['name'] if a['name'] else None, email=session['email'])
     except Exception as e:
         flash('Please do login!!!!')
+        logging.error(f"Exceptions {e}")
         return render_template('reg.html')
 
 
