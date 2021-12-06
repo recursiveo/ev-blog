@@ -120,6 +120,7 @@ def profile():
             if request.form['action'] == 'Submit':
                 logging.info("Data to get displayed", data)
                 if all([request.form['password'], request.form['confirm_mobile'], request.form['confirm_name']]):
+                    logging.info("Details from form", request.form['password'], request.form['confirm_mobile'], request.form['confirm_name'])
                     if request.form['update_password'] == request.form['confirm_password'] and request.form['mobile'] == request.form['confirm_mobile'] and request.form['name'] == request.form['confirm_name']:
                         a['mobile'] = request.form['mobile']
                         a['name'] = request.form['name']
