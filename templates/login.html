@@ -3,18 +3,8 @@
   <head>
     <meta charset="UTF-8">
     <title> Login and Registration - EVTrends </title>
-    {% with messages = get_flashed_messages() %}
-   {% if messages %}
-     <ul class="flashes">
-        {% for message in messages %}
-         <div class="message_flash">{{ message }}</div>
-        {% endfor %}
-    </ul>
-  {% endif %}
- {% endwith %}
+
     <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='styles/styles_login.css') }}">
-<!--     <script type="text/javascript" rel="script" src="{{ url_for('static', filename = 'js/login.js') }}"></script>-->
-    <!-- Fontawesome CDN Link -->
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
    </head>
@@ -26,23 +16,15 @@
 <br>
 
   <div class="container">
-<!--    <input type="checkbox" id="flip">-->
-<!--    <div class="cover">-->
-<!--      <div class="front">-->
-<!--        <img src="static/images/background.jpg" alt="">-->
-<!--      </div>-->
 
-<!--    </div>-->
     <div class="forms">
         <div class="form-content">
 		<!--    ------------------ Login Page------------------      -->
           <div class="login-form">
             <div class="title">Login</div>
 
-
-
           <form method=POST action="{{ url_for('login') }}">
-            <div class="input-boxes">
+              <div class="input-boxes">
               <div class="input-box">
                 <i class="fas fa-envelope"></i>
                 <input type="text" name=username placeholder="Enter your email" required>
@@ -53,48 +35,14 @@
               </div>
 
               <div class="button input-box">
-                <input type="submit" value="Sumbit">
+                <input type="submit" value="Submit">
               </div>
 
             </div>
 			<br>
 
-
         </form>
-
-
       </div>
-
-
-	  <!--    ------------------ Signup Form ------------------      -->
-<!--        <div class="signup-form">-->
-<!--          <div class="title">Signup</div>-->
-
-<!--        <form method=POST action="{{ url_for('signup') }}">-->
-<!--            <div class="input-boxes">-->
-<!--              <div class="input-box">-->
-<!--                <i class="fas fa-user"></i>-->
-<!--                <input type="text" name="username" placeholder="Enter your name" required>-->
-<!--              </div>-->
-<!--              <div class="input-box">-->
-<!--                <i class="fas fa-envelope"></i>-->
-<!--                <input type="text" name="email" placeholder="Enter your email" required>-->
-<!--              </div>-->
-<!--              <div class="input-box">-->
-<!--                <i class="fas fa-lock"></i>-->
-<!--                <input type="password" name="pass" placeholder="Enter your password" required>-->
-<!--              </div>-->
-<!--              <div class="button input-box">-->
-<!--                <input type="submit" value="Sumbit">-->
-<!--              </div>-->
-<!--              <div class="text sign-up-text">Already have an account? <label for="flip">Login now</label></div>-->
-<!--            </div>-->
-<!--			<br>-->
-
-<!--      </form>-->
-<!--    </div>-->
-<!--    </div>-->
-
     </div>
 
 
