@@ -12,7 +12,9 @@ from flask_mail import Mail, Message
 from bson import json_util
 
 app = Flask(__name__)
+
 app.secret_key="4564878532643869758"
+
 process_reviews = Reviews()
 
 logger = get_logger()
@@ -39,47 +41,40 @@ def index():
 
 @app.route('/login', methods=['POST', 'GET'])
 def login():
+    logging.info("Entering into login")
     if request.method == 'POST':
+        logging.info("Entering into login post")
         session['email'] = email = request.form['username']
         session['password'] = password = request.form['pass']
         data = {'email': email, 'password': password}
         existing_data = search_mongo(data)
         if existing_data:
+            logging.info("User data exists")
             print(session['email'])
             return render_template('index.html')
         else:
+            logging.info("User data not found")
             flash('Invalid Credentials. Please do register/login accordingly!!!')
             return render_template('signup.html')
     if 'email' in session:
         if session['email']:
+            logging.info("User is logged in")
             return render_template('index.html')
         return render_template('reg.html')
+    logging.info("Exiting from login")
     return render_template('reg.html')
-
-
-# def login_required(f):
-#     @wraps(f)
-#     def wrap(*args, **kwargs):
-#         if "email" in session:
-#             # need to improve
-#             return f(*args, **kwargs)
-#         else:
-#             flash("\"You shall not pass!\" ")
-#             return render_template('reg.html')
-#     return wrap
 
 
 @app.route('/signup', methods=['POST', 'GET'])
 def signup():
     logging.info("Entering into signup")
     if request.method == "POST":
-
         email = request.form['email']
         logging.info(f"Username {email}")
         data = {'email': email}
         existing_user = search_mongo(data)
-        logging.info(f'existing_user {existing_user}')
         if existing_user > 0:
+            logging.info(f'existing_user {existing_user}')
             flash("User already exist with this email id.Try to login or register with another mail id!!")
             return render_template('signup.html')
         password = request.form['pass']
@@ -95,20 +90,24 @@ def signup():
 @app.route('/home', methods=['GET'])
 @login_manager.user_loader
 def home():
+    logging.info("Entering into home page")
     if 'email' in session:
         if session['email']:
             return render_template('index.html')
+    logging.info("Exiting from home")
     return render_template('reg.html')
 
 
 @app.route('/profile', methods=['GET', 'POST'])
 def profile():
     try:
+        logging.info("Entering into profile")
         errors = None
         query_data = {"email": session['email']}
         data = fetch_data(query_data)
         count = search_mongo(query_data)
         if count == 0:
+            logging.info("Invalid data")
             errors = 'Invalid Credentials. Please try again.'
             flash('User not found!!!')
             return render_template('index.html', errors=errors)
@@ -126,12 +125,15 @@ def profile():
 
         if request.method == "POST":
             if request.form['action'] == 'Submit':
+                logging.info("Data to get displayed", data)
                 if all([request.form['password'], request.form['confirm_mobile'], request.form['confirm_name']]):
+                    logging.info("Details from form", request.form['password'], request.form['confirm_mobile'], request.form['confirm_name'])
                     if request.form['update_password'] == request.form['confirm_password'] and request.form['mobile'] == request.form['confirm_mobile'] and request.form['name'] == request.form['confirm_name']:
                         a['mobile'] = request.form['mobile']
                         a['name'] = request.form['name']
                         if password == request.form['password']:
                             if request.form['update_password'] == request.form['confirm_password']:
+                                logging.info('updating data when password matches')
                                 update_data(query_data, {
                                     '$set': {
                                                  "name": request.form['name'],
@@ -139,11 +141,15 @@ def profile():
                                                  "mobile": request.form['mobile']
                                              }
                                              })
+                                flash("User data updated successfully!!")
                             else:
+                                logging.info('Data mismatch')
                                 flash("Password mismatch. Please do confirm with new password!!")
                         else:
+                            logging.info('Data mismatch')
                             flash("Password mismatch. Please re-enter current password!!")
                     else:
+                        logging.info('Data mismatch')
                         flash("Data mismatch!!")
 
                 elif all([request.form['password'], request.form['confirm_mobile']]):
@@ -151,81 +157,108 @@ def profile():
                     if password == request.form['password']:
                         if request.form['update_password'] == request.form['confirm_password']:
                             if request.form['mobile'] == request.form['confirm_mobile']:
+                                logging.info('Data update started')
                                 update_data(query_data, {
                                     '$set': {
                                                  "name": request.form['name'],
                                                  "password": request.form['update_password']
                                              }
                                              })
+                                flash("User data updated successfully!!")
+                                logging.info('Data update completed')
                             else:
+                                logging.info('Data mismatch')
                                 flash("Mobile number doesn't match. Please enter correct mobile!!")
                         else:
+                            logging.info('Data mismatch')
                             flash("Password mismatch. Please do confirm with new password!!")
                     else:
+                        logging.info('Data mismatch')
                         flash("Password mismatch. Please re-enter current password!!")
 
                 elif all([request.form['confirm_mobile'], request.form['confirm_name']]):
                     if request.form['mobile'] == request.form['confirm_mobile'] and request.form['name'] == request.form['confirm_name']:
                         a['mobile'] = request.form['mobile']
                         a['name'] = request.form['name']
-
+                        logging.info('Data update started')
                         update_data(query_data, {
                             '$set': {
                                          "name": request.form['name'],
                                          "mobile": request.form['mobile']
                                      }
                                      })
+                        flash("User data updated successfully!!")
+                        logging.info('Completed data update')
                     else:
+                        logging.info('Data mismatch')
                         flash("Entered name/mobile number mismatch. Please do verify and re-enter it!!")
 
                 elif all([request.form['password'], request.form['name']]):
                     if password == request.form['password']:
                         if request.form['update_password'] == request.form['confirm_password']:
                             a['name'] = request.form['name']
+                            logging.info('Data update started')
                             update_data(query_data, {
                                 '$set': {
                                              "name": request.form['name'],
                                              "password": request.form['update_password']
                                          }
                                          })
+                            flash("User data updated successfully!!")
+                            logging.info('Data update completed')
                         else:
+                            logging.info('Data mismatch')
                             flash("Password mismatch. Please do confirm with new password!!")
                     else:
+                        logging.info('Data mismatch')
                         flash("Password mismatch. Please re-enter current password!!")
 
                 elif request.form['password'] and not all([request.form['mobile'], request.form['name']]):
                     if password == request.form['password']:
                         if request.form['update_password'] == request.form['confirm_password']:
+                            logging.info('Data update started')
                             update_data(query_data, {
                                 '$set': {
                                              "password": request.form['update_password']
                                          }
                                          })
+                            flash("User data updated successfully!!")
+                            logging.info('Data update completed')
                         else:
+                            logging.info('Data mismatch')
                             flash("Password mismatch. Please do confirm with new password!!")
                     else:
+                        logging.info('Data mismatch')
                         flash("Password mismatch. Please re-enter current password!!")
 
                 elif request.form['mobile'] and request.form['confirm_mobile'] and not all([request.form['password'], request.form['name']]):
                     if request.form['mobile'] == request.form['confirm_mobile']:
                         a['mobile'] = request.form['mobile']
+                        logging.info('Data update started')
                         update_data(query_data, {
                             '$set': {
                                          "mobile": request.form['mobile']
                                      }
                                      })
+                        flash("User data updated successfully!!")
+                        logging.info('Data update completed')
                     else:
+                        logging.info('Data mismatch')
                         flash("Mobile number mismatch. Please do verify!!")
 
                 elif request.form['name'] and not all([request.form['mobile'], request.form['password']]):
                     if request.form['name'] == request.form['confirm_name']:
                         a['name'] = request.form['name']
+                        logging.info('Data update started')
                         update_data(query_data,
                                  {'$set': {
                                      "name": request.form['name']
                                  }
                                      })
+                        flash("User data updated successfully!!")
+                        logging.info('Data update completed')
                     else:
+                        logging.info('Data mismatch')
                         flash("Name mismatch. Please do verify!!")
             elif request.form['action'] == 'Delete':
                 data = delete_data(query_data)
@@ -233,10 +266,12 @@ def profile():
                 session.pop('email', None)
                 return render_template('reg.html')
 
+        logging.info("Exiting from profile")
         return render_template('profilepage.html', error=errors, mobile=a['mobile'] if a['mobile'] else '',
                            name=a['name'] if a['name'] else None, email=session['email'])
     except Exception as e:
         flash('Please do login!!!!')
+        logging.error(f"Exceptions {e}")
         return render_template('reg.html')
 
 
@@ -301,6 +336,7 @@ def update_reviews():
 def add_reviews():
     return render_template('add-review.html')
 
+
 @app.route('/edit-review', methods=['GET'])
 def edit_review():
     return render_template('edit-review.html')
@@ -320,9 +356,11 @@ def check_id():
     res = process_reviews.check_id(data, email)
     return json.dumps(res)
 
+
 @app.route('/delete-review', methods=['GET'])
 def delete_review_view():
     return render_template('delete-review.html')
+
 
 @app.route('/delete_review', methods=['POST'])
 def delete_review():
@@ -335,9 +373,11 @@ def delete_review():
 def openContactUs():
     return render_template('ContactUs.html')
 
+
 @app.route('/AboutUs/')
 def openAboutUs():
     return render_template('AboutUs.html')
+
 
 @app.route("/open_Enquiry_page/")
 def openEnquiryPage():
@@ -401,9 +441,12 @@ def sendmail():
 
 @app.route('/logout')
 def logout():
-    session.pop('email')
-    session.pop('password')
-    print(session)
+    logging.info("Entering into logout")
+    if 'email' in session:
+        session.pop('email')
+        session.pop('password')
+        print(session)
+    logging.info("Exiting from logout")
     return render_template('reg.html')
 
 

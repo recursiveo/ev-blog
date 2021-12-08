@@ -151,9 +151,7 @@ nav input {
 
 .message_flash {
       color: mediumblue;
-      position: fixed;
-      top: 83px;
-      left: 43%;
+      position: relative;
 }
 
 .labels {

@@ -214,6 +214,10 @@ body{
     display: none;
   }
 
+.flash {
+      color: red;
+      position: relative;
+}
 
 
 

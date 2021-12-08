@@ -18,10 +18,8 @@ body{
 }
 
 .flash {
-      color: mediumblue;
-      position: fixed;
-      top: 15px;
-      left: 550px;
+      color: red;
+      position: relative;
 }
 
 .container{

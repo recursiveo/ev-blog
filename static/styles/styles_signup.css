@@ -18,9 +18,8 @@ body{
 }
 
 .flash {
-      color: mediumblue;
-      position: fixed;
-      top: 15px;
+      color: red;
+      position: relative;
 }
 
 .container{
@@ -220,8 +219,4 @@ body{
   .container #flip:checked ~ .forms .login-form{
     display: none;
   }
-
-
-
-
 }
