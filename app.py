@@ -427,10 +427,12 @@ def sendmail():
 
 @app.route('/logout')
 def logout():
+    logging.info("Entering into logout")
     if 'email' in session:
         session.pop('email')
         session.pop('password')
         print(session)
+    logging.info("Exiting from logout")
     return render_template('reg.html')
 
 
