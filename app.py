@@ -139,6 +139,7 @@ def profile():
                                                  "mobile": request.form['mobile']
                                              }
                                              })
+                                flash("User data updated successfully!!")
                             else:
                                 logging.info('Data mismatch')
                                 flash("Password mismatch. Please do confirm with new password!!")
@@ -161,6 +162,7 @@ def profile():
                                                  "password": request.form['update_password']
                                              }
                                              })
+                                flash("User data updated successfully!!")
                                 logging.info('Data update completed')
                             else:
                                 logging.info('Data mismatch')
@@ -183,6 +185,7 @@ def profile():
                                          "mobile": request.form['mobile']
                                      }
                                      })
+                        flash("User data updated successfully!!")
                         logging.info('Completed data update')
                     else:
                         logging.info('Data mismatch')
@@ -199,6 +202,7 @@ def profile():
                                              "password": request.form['update_password']
                                          }
                                          })
+                            flash("User data updated successfully!!")
                             logging.info('Data update completed')
                         else:
                             logging.info('Data mismatch')
@@ -216,6 +220,7 @@ def profile():
                                              "password": request.form['update_password']
                                          }
                                          })
+                            flash("User data updated successfully!!")
                             logging.info('Data update completed')
                         else:
                             logging.info('Data mismatch')
@@ -233,6 +238,7 @@ def profile():
                                          "mobile": request.form['mobile']
                                      }
                                      })
+                        flash("User data updated successfully!!")
                         logging.info('Data update completed')
                     else:
                         logging.info('Data mismatch')
@@ -247,6 +253,7 @@ def profile():
                                      "name": request.form['name']
                                  }
                                      })
+                        flash("User data updated successfully!!")
                         logging.info('Data update completed')
                     else:
                         logging.info('Data mismatch')
@@ -327,6 +334,7 @@ def update_reviews():
 def add_reviews():
     return render_template('add-review.html')
 
+
 @app.route('/edit-review', methods=['GET'])
 def edit_review():
     return render_template('edit-review.html')
@@ -346,9 +354,11 @@ def check_id():
     res = process_reviews.check_id(data, email)
     return json.dumps(res)
 
+
 @app.route('/delete-review', methods=['GET'])
 def delete_review_view():
     return render_template('delete-review.html')
+
 
 @app.route('/delete_review', methods=['POST'])
 def delete_review():
@@ -361,9 +371,11 @@ def delete_review():
 def openContactUs():
     return render_template('ContactUs.html')
 
+
 @app.route('/AboutUs/')
 def openAboutUs():
     return render_template('AboutUs.html')
+
 
 @app.route("/open_Enquiry_page/")
 def openEnquiryPage():
