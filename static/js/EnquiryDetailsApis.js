@@ -80,7 +80,7 @@ async function sendReplyEmail(email,id,replyText) {
         console.log(json +'response')
         getEnqDetails()
       } else {
-        alert("HTTP-Error: " + response.status)
+        alert("Can't Send Email Now. Please try again later!");
             getEnqDetails()
       }
 
