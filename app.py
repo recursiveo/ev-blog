@@ -1,6 +1,7 @@
+import flask_login
 from flask import Flask, request, jsonify, render_template, session, flash, redirect
 from functools import wraps
-from flask_login import login_required, LoginManager
+from flask_login import login_required, LoginManager, current_user
 from src.PyMongo_Operations import insert_mongo, search_mongo, fetch_data, update_data, delete_data
 import logging
 from src.logger import get_logger
@@ -249,8 +250,11 @@ def add_header(r):
 @app.route('/review-home')
 def reviews():
     try:
-        # return render_template('view-reviews.html')
-        return render_template('review-home.html')
+        if 'email' in session:
+            if session['email']:
+                return render_template('review-home.html')
+            return render_template('reg.html')
+        return render_template('reg.html')
     except Exception as e:
         logger.error(e)
         raise e
@@ -259,8 +263,13 @@ def reviews():
 @app.route('/reviews', methods=['GET'])
 def show_reviews():
     try:
-        data = process_reviews.get_reviews(request.args['brand'])
-        return render_template('view-reviews.html', list_data=data)
+        if 'email' in session:
+            if session['email']:
+                data = process_reviews.get_reviews(request.args['brand'])
+                return render_template('view-reviews.html', list_data=data)
+            return render_template('reg.html')
+        return render_template('reg.html')
+
     except Exception as e:
         logger.error(e)
         raise e
@@ -299,11 +308,20 @@ def update_reviews():
 
 @app.route('/add-review', methods=['GET'])
 def add_reviews():
-    return render_template('add-review.html')
+    if 'email' in session:
+        if session['email']:
+            return render_template('add-review.html')
+        return render_template('reg.html')
+    return render_template('reg.html')
+
 
 @app.route('/edit-review', methods=['GET'])
 def edit_review():
-    return render_template('edit-review.html')
+    if 'email' in session:
+        if session['email']:
+            return render_template('edit-review.html')
+        return render_template('reg.html')
+    return render_template('reg.html')
 
 
 @app.route('/modify_review', methods=['POST'])
@@ -320,9 +338,15 @@ def check_id():
     res = process_reviews.check_id(data, email)
     return json.dumps(res)
 
+
 @app.route('/delete-review', methods=['GET'])
 def delete_review_view():
-    return render_template('delete-review.html')
+    if 'email' in session:
+        if session['email']:
+            return render_template('delete-review.html')
+        return render_template('reg.html')
+    return render_template('reg.html')
+
 
 @app.route('/delete_review', methods=['POST'])
 def delete_review():
