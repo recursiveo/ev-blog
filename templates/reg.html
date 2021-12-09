@@ -3,15 +3,6 @@
   <head>
     <meta charset="UTF-8">
     <title> Login and Registration - EVTrends </title>
-    {% with messages = get_flashed_messages() %}
-    {% if messages %}
-     <ul class="flashes">
-        {% for message in messages %}
-         <div class="flash">{{ message }}</div>
-        {% endfor %}
-    </ul>
-  {% endif %}
- {% endwith %}
 
     <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='styles/style.css') }}">
 <!--     <script type="text/javascript" rel="script" src="{{ url_for('static', filename = 'js/login.js') }}"></script>-->
@@ -32,15 +23,25 @@
       <div class="front">
         <img src="static/images/background.jpg" alt="">
       </div>
-
     </div>
+
     <div class="forms">
-        <div class="form-content">
+  <div class="form-content">
+
 		<!--    ------------------ Login Page------------------      -->
           <div class="login-form">
-            <div class="title">Login</div>
+          {% with messages = get_flashed_messages() %}
+      {% if messages %}
+       <ul class="flashes">
+          {% for message in messages %}
+           <div class="flash">{{ message }}</div>
+          {% endfor %}
+      </ul>
+    {% endif %}
+   {% endwith %}
 
 
+         <div class="title">Login</div>
 
           <form method=POST action="{{ url_for('login') }}">
             <div class="input-boxes">
@@ -60,10 +61,7 @@
 
             </div>
 			<br>
-
-
         </form>
-
 
       </div>
 
@@ -87,7 +85,7 @@
                 <input type="password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters" name="pass" placeholder="Enter your password" required>
               </div>
               <div class="button input-box">
-                <input type="submit" value="Sumbit">
+                <input type="submit" value="Submit">
               </div>
               <div class="text sign-up-text">Already have an account? <label for="flip">Login now</label></div>
             </div>
